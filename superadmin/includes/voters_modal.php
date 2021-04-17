@@ -37,6 +37,15 @@
                       <input type="password" class="form-control" id="password" name="password" required>
                     </div>
                 </div>
+
+                  <div class="form-group">
+                      <label for="status" class="col-sm-3 control-label">Status</label>
+
+                      <div class="col-sm-9">
+                          <input type="text" value="Not Verified" class="form-control" id="status" name="status" disabled>
+                      </div>
+                  </div>
+
                    <div class="form-group">
                     <label for="date" class="col-sm-3 control-label">Date</label>
 
