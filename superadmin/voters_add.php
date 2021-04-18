@@ -11,7 +11,6 @@
 		if(!empty($filename)){
 			move_uploaded_file($_FILES['photo']['tmp_name'], '../images/'.$filename);
 		}
-		$status = $_POST['status'];
 
 		$sql2 = mysqli_query($conn,"SELECT username from admin WHERE username = '$username'");
 		if (mysqli_num_rows($sql2)==1) {
@@ -22,7 +21,8 @@
 		}
 		else
 		{
-            $sql = "INSERT INTO `admin` (`username`, `password`, `firstname`, `lastname`, `photo`, `created_on`, 'status') VALUES ('$username', '$password', '$firstname', '$lastname', '$filename', '$date', '$status') ";
+		    $status = "Not Verified";
+            $sql = "INSERT INTO `admin` (`username`, `password`, `firstname`, `lastname`, `photo`, `created_on`,`status`) VALUES ('$username', '$password', '$firstname', '$lastname', '$filename', '$date','$status')";
 
 			if($conn->query($sql)){
 				echo '<script language="javascript">';

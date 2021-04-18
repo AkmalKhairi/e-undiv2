@@ -38,14 +38,6 @@
                     </div>
                 </div>
 
-                  <div class="form-group">
-                      <label for="status" class="col-sm-3 control-label">Status</label>
-
-                      <div class="col-sm-9">
-                          <input type="text" value="Not Verified" class="form-control" id="status" name="status" disabled>
-                      </div>
-                  </div>
-
                    <div class="form-group">
                     <label for="date" class="col-sm-3 control-label">Date</label>
 
@@ -150,7 +142,7 @@
                 <h4 class="modal-title"><b>Approve Admin</b></h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal" method="POST" action="voters_add.php">
+                <form class="form-horizontal" method="POST" action="voters_approve.php">
                     <input type="hidden" class="id" name="id">
                     <div class="text-center">
                         <p>APPROVE ADMIN</p>
@@ -159,7 +151,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-                <button type="submit" class="btn btn-success btn-flat" name="add"><i class="fa fa-thumbs-up"></i> Approve</button>
+                <button type="submit" class="btn btn-success btn-flat" name="approval"><i class="fa fa-thumbs-up"></i> Approve</button>
                 </form>
             </div>
         </div>
