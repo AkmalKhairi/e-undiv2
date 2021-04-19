@@ -17,13 +17,6 @@
                         </div>
                     </div>-->
                     <div class="form-group">
-                        <label for="password" class="col-sm-3 control-label">Password</label>
-
-                        <div class="col-sm-9">
-                            <input type="password" class="form-control" id="password" name="password" value="<?php echo $voter['password']; ?>">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="firstname" class="col-sm-3 control-label">Firstname</label>
 
                         <div class="col-sm-9">
@@ -37,6 +30,15 @@
                             <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $voter['lastname']; ?>">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="password" class="col-sm-3 control-label">Password</label>
+
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" id="password" name="password" value="<?php echo $voter['password']; ?>">
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="photo" class="col-sm-3 control-label">Photo:</label>
 

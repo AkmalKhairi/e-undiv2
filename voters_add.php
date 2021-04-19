@@ -19,7 +19,8 @@ if(isset($_POST['add'])){
     }
     else
     {
-        $sql = "INSERT INTO voters (voters_id, password, firstname, lastname, photo) VALUES ('$voter', '$password', '$firstname', '$lastname', '$filename')";
+        $status = "Not Verified";
+        $sql = "INSERT INTO voters (voters_id, password, firstname, lastname, photo,status) VALUES ('$voter', '$password', '$firstname', '$lastname', '$filename', '$status')";
         if($conn->query($sql)){
             echo '<script language="javascript">';
             echo 'alert("Voters sucessfully insert")';

@@ -109,6 +109,7 @@
             getRow(id);
         });
 
+
         $(document).on('click', '.photo', function(e){
             e.preventDefault();
             var id = $(this).data('id');
