@@ -11,7 +11,7 @@
 
       <section class="content-header">
           <h1>
-              Pending Approval Admin
+              Pending List (Voter)
           </h1>
           <ol class="breadcrumb">
               <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -54,7 +54,7 @@
                           ".$row['status']."
                           </td>
                           <td>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-thumbs-down'></i> Reject</button>
                             <button class='btn btn-success btn-sm approve btn-flat' data-id='".$row['id']."'><i class='fa fa-check'></i> Confirm</button>
                           </td>
                         </tr>
@@ -71,7 +71,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Voters List
+        Verified List (Voter)
       </h1>
 
     </section>
