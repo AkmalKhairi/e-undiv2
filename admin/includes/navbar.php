@@ -10,7 +10,6 @@
   <nav class="navbar navbar-static-top">
     <!-- Sidebar toggle button-->
 
-
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <!-- User Account: style can be found in dropdown.less -->

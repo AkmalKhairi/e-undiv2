@@ -1,5 +1,4 @@
 <header class="main-header">
-    <nav class="navbar navbar-static-top">
     <!-- Logo -->
     <a href="home.php" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -8,7 +7,7 @@
         <span class="logo-lg"><img src="https://img.icons8.com/small/30/000000/elections.png"> <b> E-Undi </span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
-
+        <nav class="navbar navbar-static-top">
         <!-- Sidebar toggle button-->
 
         <div class="navbar-custom-menu">

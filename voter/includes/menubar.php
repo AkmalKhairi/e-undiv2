@@ -16,8 +16,8 @@
             <li class="header"></li>
             <li class=""><a href="home.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
             <li class=""><a href="camera.php"><span class="fa fa-camera"></span> <span>Camera</span></a></li>
+            <li class=""><a href="#"><i class="fa fa-users"></i> <span>Vote</span></a></li>
             <li class="header"></li>
-            <li class=""><a href="#"><i class="fa fa-users"></i> <span>Test</span></a></li>
             <li class=""><a href="#"><i class="fa fa-tasks"></i> <span>Test</span></a></li>
             <li class=""><a href="#"><i class="fa fa-black-tie"></i> <span>Test</span></a></li>
             <!--       <li class="header"></li>

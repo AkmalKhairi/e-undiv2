@@ -54,8 +54,10 @@
                           ".$row['status']."
                           </td>
                           <td>
+                            <button class='btn btn-dark btn-sm info btn-flat' data-id='".$row['id']."'><i class='fa fa-user-circle'></i> View </button>
                             <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-thumbs-down'></i> Reject</button>
                             <button class='btn btn-success btn-sm approve btn-flat' data-id='".$row['id']."'><i class='fa fa-check'></i> Confirm</button>
+
                           </td>
                         </tr>
                       ";
@@ -156,12 +158,14 @@
 <?php include 'includes/scripts.php'; ?>
 <script>
 $(function(){
+    <!-- Edit button Function -->
   $(document).on('click', '.edit', function(e){
     e.preventDefault();
     $('#edit').modal('show');
     var id = $(this).data('id');
     getRow(id);
   });
+    <!-- Delete button Function -->
 
   $(document).on('click', '.delete', function(e){
     e.preventDefault();
@@ -169,10 +173,19 @@ $(function(){
     var id = $(this).data('id');
     getRow(id);
   });
+    <!-- Approve button Function -->
 
     $(document).on('click', '.approve', function(e){
         e.preventDefault();
         $('#approve').modal('show');
+        var id = $(this).data('id');
+        getRow(id);
+    });
+    <!-- View button Function -->
+
+    $(document).on('click', '.info', function(e){
+        e.preventDefault();
+        $('#info').modal('show');
         var id = $(this).data('id');
         getRow(id);
     });
