@@ -6,11 +6,12 @@
 		$voter = $_POST['voter'];
 		$password = $_POST['password'];
 
-		$sql = "SELECT * FROM voters WHERE voters_id = '$voter'";
+        $status = "Verified";
+        $sql = "SELECT * FROM voters WHERE voters_id = '$voter' AND status = '$status'";
 		$query = $conn->query($sql);
 
 		if($query->num_rows < 1){
-			$_SESSION['error'] = 'Cannot find voter with the ID';
+			$_SESSION['error'] = 'Incorrect credentials or account not Verify yet.';
 		}
 		else{
 			$row = $query->fetch_assoc();

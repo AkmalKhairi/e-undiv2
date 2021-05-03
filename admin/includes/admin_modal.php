@@ -37,13 +37,18 @@
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
 
                         <div class="col-sm-9">
-                            <input type="date" id="date" name="date">
+                            <input type="text" id="date" name="date" disabled>
+                            <script>
+                                var today = new Date();
+                                var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
+                                document.getElementById("date").value = date + ' ' + '(TODAY)';
+                            </script>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="form-group">
                         <label for="photo" class="col-sm-3 control-label">Photo</label>
 
@@ -159,5 +164,6 @@
         </div>
     </div>
 </div>
+
 
 

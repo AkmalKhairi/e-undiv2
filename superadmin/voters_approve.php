@@ -8,8 +8,11 @@ if(isset($_POST['approval'])){
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
 
+/*    $date = date('Y-m-d');*/
     $status = "Verified";
     $sql = "UPDATE admin SET status = '$status' WHERE id = '$id'";
+/*    $sql = "UPDATE admin SET status = '$status' AND created_on = '$date' WHERE id = '$id'";*/
+
     if($conn->query($sql)){
         $_SESSION['success'] = 'Admin successfully approved!';
     }

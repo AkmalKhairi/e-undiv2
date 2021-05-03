@@ -10,8 +10,8 @@ if(isset($_SESSION['voter'])){
 ?>
 
 <?php include 'includes/header.php'; ?>
-<body style="background-color: #93c6ef; overflow-y: hidden; " class="hold-transition login-page ">
-<div class="login-box">
+<body style="background-image: url('../images/bg.jpg'); overflow-y: hidden; " class="hold-transition login-page ">
+<div style="padding-top: 100px;" class="login-box">
     <div class="login-logo">
         <img src="https://img.icons8.com/small/40/000000/elections.png">
         <b style="color: #0a0a0a" >E-Undi</b>
@@ -22,8 +22,7 @@ if(isset($_SESSION['voter'])){
 
         <form action="login.php" method="POST">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="voter" placeholder="Voter's ID" required>
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <input placeholder="NRIC" maxlength="12" type="text" onkeypress="return onlyNumberKey(event)" class="form-control" id="voter" name="voter" required>                <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <input type="password" class="form-control" name="password" placeholder="Password" required>
@@ -38,6 +37,7 @@ if(isset($_SESSION['voter'])){
     </div>
     <div class="row">
         <p style="padding-left: 80px;"> No Account yet? <a href="#addnew" data-toggle="modal"> REGISTER HERE</a></p>
+        <a style="padding-left: 90px;" href="verification.php"> Account Verification Status </a>
     </div>
     <!--<div class="row">
         <div class="col-md-6 column">
@@ -58,5 +58,16 @@ if(isset($_SESSION['voter'])){
 
 <?php include 'includes/scripts.php' ?>
 <?php include 'includes/voters_modal.php'; ?>
+
+<script>
+    function onlyNumberKey(evt) {
+
+        // Only ASCII charactar in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+</script>
 
 </body>

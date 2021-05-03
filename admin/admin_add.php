@@ -21,7 +21,9 @@ if(isset($_POST['add'])){
     }
     else
     {
-        $sql = "INSERT INTO `admin` (`username`, `password`, `firstname`, `lastname`, `photo`, `created_on`) VALUES ('$username', '$password', '$firstname', '$lastname', '$filename', '$date')";
+        $date = date('Y-m-d');
+        $status = "Not Verified";
+        $sql = "INSERT INTO `admin` (`username`, `password`, `firstname`, `lastname`, `photo`, `created_on`, `status`) VALUES ('$username', '$password', '$firstname', '$lastname', '$filename', '$date', '$status')";
 
         if($conn->query($sql)){
             echo '<script language="javascript">';

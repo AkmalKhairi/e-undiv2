@@ -31,6 +31,7 @@
                   <th>Lastname</th>
                   <th>Photo</th>
                   <th>Status</th>
+                  <th>Date Register</th>
                   <th>Tools</th>
                 </thead>
                 <tbody>
@@ -50,6 +51,9 @@
                           </td>
                           <td>
                           ".$row['status']."
+                          </td>
+                          <td>
+                          ".$row['created_on']."
                           </td>
                           <td>
                             <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>

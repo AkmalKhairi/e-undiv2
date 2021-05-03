@@ -5,8 +5,8 @@ if(isset($_SESSION['admin'])){
 }
 ?>
 <?php include 'includes/header.php'; ?>
-<body style="background-color: #93c6ef; overflow-y: hidden; " class="hold-transition login-page ">
-<div class="login-box">
+<body style="background-image: url('../images/bg.jpg'); overflow-y: hidden; " class="hold-transition login-page ">
+<div style="padding-top: 100px;" class="login-box">
     <div class="login-logo">
         <img src="https://img.icons8.com/small/40/000000/elections.png">
         <b style="color: #0a0a0a" >E-Undi</b>
@@ -53,5 +53,6 @@ if(isset($_SESSION['admin'])){
 
 <?php include 'includes/scripts.php' ?>
 <?php include 'includes/admin_modal.php'; ?>
+
 
 </body>

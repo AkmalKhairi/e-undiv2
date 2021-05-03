@@ -5,10 +5,11 @@
   	}
 ?>
 <?php include 'includes/header.php'; ?>
-<body class="hold-transition login-page">
-<div class="login-box">
+<body style="background-image: url('../images/bg.jpg');" class="hold-transition login-page">
+<div style="padding-top: 100px;" class="login-box">
   	<div class="login-logo">
-  		<b>Voting System</b>
+        <img src="https://img.icons8.com/small/40/000000/elections.png">
+        <b style="color: #0a0a0a" >E-Undi</b>
   	</div>
   
   	<div class="login-box-body">

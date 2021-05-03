@@ -10,7 +10,7 @@ if(isset($_SESSION['voter'])){
 ?>
 
 <?php include 'includes/header.php'; ?>
-<body style="background-color: #93c6ef; overflow-y: hidden; " class="hold-transition login-page ">
+<body style=" overflow-y: hidden; " class="hold-transition login-page ">
 <div class="login-box">
     <div class="login-logo">
         <img src="https://img.icons8.com/small/40/000000/elections.png">

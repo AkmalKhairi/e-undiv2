@@ -2,13 +2,13 @@
 <?php include 'includes/slugify.php'; ?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-yellow sidebar-mini">
-<div class="wrapper">
+<div style="overflow-y: hidden;" class="wrapper">
 
     <?php include 'includes/navbar.php'; ?>
     <?php include 'includes/menubar.php'; ?>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div  class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -25,7 +25,6 @@
             <div class="row">
                 <div class="col-sm-10 col-sm-offset-1">
 
-
                     <?php
                     $sql = "SELECT * FROM votes WHERE voters_id = '".$voter['id']."'";
                     $vquery = $conn->query($sql);
@@ -33,7 +32,7 @@
                         ?>
                         <div class="text-center">
                             <h3>You have already voted for this election.</h3>
-                            <a href="#view" data-toggle="modal" class="btn btn-flat btn-primary btn-lg">View Ballot</a>
+                            <a style="padding: 10px 24px; " href="#view" data-toggle="modal" class="btn btn-flat btn-info btn-lg center">View Ballot</a>
                             <?php
                             $sql = "SELECT * FROM positions ORDER BY priority ASC";
                             $query = $conn->query($sql);
@@ -44,11 +43,13 @@
                                 echo "
               <div class='box box-solid'>
                 <div class='box-header with-border'>
-                  <h4 class='box-title'><b>".$row['description']."</b></h4>
+                                  <h3> Voting Name: </h3>
+                  <h3 class='box-title'><b>".$row['description']."</b></h3>
                 </div>
                 <div class='box-body'>
                   <div class='chart'>
-                    <canvas id='".slugify($row['description'])."' style='height:200px'></canvas>
+                    <canvas  id='".slugify($row['description'])."' style='height:300px'> </canvas>
+                    
                   </div>
                 </div>
               </div>
@@ -58,6 +59,9 @@
                             }
                             if($inc == 1) echo "<div class='col-sm-6'></div></div>";
                             ?>
+
+
+
                         </div>
                         <?php
                     }
@@ -186,7 +190,7 @@ while($row = $query->fetch_assoc()){
                 $('#plat_view').html(platform);
             });
 
-            $(document).on('click', '.test', function(e){
+            $(function(){
                 var rowid = '<?php echo $row['id']; ?>';
                 var description = '<?php echo slugify($row['description']); ?>';
                 var barChartCanvas = $('#'+description).get(0).getContext('2d')
