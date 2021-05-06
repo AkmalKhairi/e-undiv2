@@ -22,9 +22,12 @@
 				$_SESSION['error'] = 'Incorrect password';
 			}
 		}
-		
+        $sql2 = "UPDATE voters SET logintime = CURRENT_TIMESTAMP WHERE voters_id = '$voter'";
+        $query = $conn->query($sql2);
 	}
-	else{
+
+
+else{
 		$_SESSION['error'] = 'Input voter credentials first';
 	}
 

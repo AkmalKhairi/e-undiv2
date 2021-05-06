@@ -2,7 +2,7 @@
 <?php include 'includes/slugify.php'; ?>
 <?php include 'includes/header.php'; ?>
 <body class="hold-transition skin-yellow sidebar-mini">
-<div style="overflow-y: hidden;" class="wrapper">
+<div class="wrapper">
 
     <?php include 'includes/navbar.php'; ?>
     <?php include 'includes/menubar.php'; ?>
@@ -22,7 +22,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <div class="row">
+            <div style="padding-top: 80px;" class="row">
                 <div class="col-sm-10 col-sm-offset-1">
 
                     <?php
@@ -135,7 +135,7 @@
                             ?>
                             <div class="text-center">
                                 <!-- <button type="button" class="btn btn-success btn-flat" id="preview"><i class="fa fa-file-text"></i> Preview</button>
-                         -->	<button type="submit" class="btn btn-primary btn-flat" name="vote">
+                         -->	<button style="padding: 14px 28px; width: 100%; font-size: 20px;" type="submit" class="btn btn-success btn-flat" name="vote">
                                     <i class="fa fa-check-square-o"></i> Submit</button>
                             </div>
                         </form>
