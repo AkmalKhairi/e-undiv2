@@ -18,7 +18,7 @@
         		</tr>
         	';
 
-        	$sql = "SELECT * FROM candidates WHERE position_id = '$id' ORDER BY lastname ASC";
+        	$sql = "SELECT * FROM candidates WHERE position_id = '$id' ORDER BY firstname ASC";
     		$cquery = $conn->query($sql);
     		while($crow = $cquery->fetch_assoc()){
     			$sql = "SELECT * FROM votes WHERE candidate_id = '".$crow['id']."'";

@@ -3,7 +3,7 @@
 	include 'includes/conn.php';
 
 	if(isset($_POST['login'])){
-		$voter = $_POST['voter'];
+		$voter = ($_POST['voter']);
 		$password = $_POST['password'];
 
         $status = "Verified";

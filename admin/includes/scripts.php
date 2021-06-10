@@ -15,6 +15,8 @@
 <script src="../bower_components/chart.js/Chart.js"></script>
 <!-- ChartJS Horizontal Bar -->
 <script src="../bower_components/chart.js/Chart.HorizontalBar.js"></script>
+
+
 <!-- daterangepicker -->
 <script src="../bower_components/moment/min/moment.min.js"></script>
 <script src="../bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>

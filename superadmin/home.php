@@ -49,29 +49,87 @@
         <!-- ./col -->
         <div class="col-lg-3 col-xs-6">
           <!-- small box -->
-          <div class="small-box bg-yellow">
+          <div class="small-box bg-green">
             <div class="inner">
               <?php
-                $sql = "SELECT * FROM admin";
+                $sql = "SELECT * FROM admin where status='verified'";
                 $query = $conn->query($sql);
 
                 echo "<h3>".$query->num_rows."</h3>";
               ?>
              
-              <p>Total Admin</p>
+              <p>Total Verified Admin</p>
             </div>
             <div class="icon">
               <i class="fa fa-users"></i>
             </div>
-            <a href="voters.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="admin.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
+
+          <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-yellow">
+                  <div class="inner">
+                      <?php
+                      $sql = "SELECT * FROM admin where status='not verified'";
+                      $query = $conn->query($sql);
+
+                      echo "<h3>".$query->num_rows."</h3>";
+                      ?>
+
+                      <p>Total Pending Admin</p>
+                  </div>
+                  <div class="icon">
+                      <i class="fa fa-users"></i>
+                  </div>
+                  <a href="admin_not.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+          </div>
+
+          <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                  <div class="inner">
+                      <?php
+                      $sql = "SELECT * FROM voters where status='verified'";
+                      $query = $conn->query($sql);
+
+                      echo "<h3>".$query->num_rows."</h3>";
+                      ?>
+
+                      <p>Total Verified Voters</p>
+                  </div>
+                  <div class="icon">
+                      <i class="fa fa-users"></i>
+                  </div>
+                  <a href="voters.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+          </div>
+
+          <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-yellow">
+                  <div class="inner">
+                      <?php
+                      $sql = "SELECT * FROM voters where status='not verified'";
+                      $query = $conn->query($sql);
+
+                      echo "<h3>".$query->num_rows."</h3>";
+                      ?>
+
+                      <p>Total Pending Voters</p>
+                  </div>
+                  <div class="icon">
+                      <i class="fa fa-users"></i>
+                  </div>
+                  <a href="voters_not.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+              </div>
+          </div>
+
       </div>
 
-
-
-      
       </section>
       <!-- right col -->
     </div>

@@ -10,8 +10,8 @@
 		$row = $query->fetch_assoc();
 
 		$priority = $row['priority'] + 1;
-		
-		$sql = "INSERT INTO positions (description, max_vote, priority) VALUES ('$description', '$max_vote', '$priority')";
+        $status = "Ongoing";
+		$sql = "INSERT INTO positions (description, max_vote, priority,status,startdate) VALUES ('$description', '$max_vote', '$priority', '$status',CURRENT_TIMESTAMP)";
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Position added successfully';
 		}

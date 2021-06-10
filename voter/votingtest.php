@@ -1,6 +1,6 @@
 <?php include 'includes/session.php'; ?>
 <?php include 'includes/header.php'; ?>
-<body class="hold-transition skin-black-light sidebar-mini">
+<body class="hold-transition skin-yellow sidebar-mini">
 <div class="wrapper">
 
     <?php include 'includes/navbar.php'; ?>
@@ -58,19 +58,22 @@
                                 <table id="example1" class="table table-bordered">
                                     <thead>
                                     <th style="text-align: center;">Voting Title</th>
+                                    <th style="text-align: center;">Candidates</th>
                                     <th style="text-align: center;">Tools</th>
                                     </thead>
                                     <tbody>
                                     <?php
-                                    $sql = "SELECT description FROM positions";
+                                    $sql = "SELECT *, candidates.id AS canid FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id GROUP BY positions.priority ASC";
                                     $query = $conn->query($sql);
                                     while($row = $query->fetch_assoc()){
                                         echo "
                         <tr>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
                           <td>
+                          <a href='#platform' data-toggle='modal' class='btn btn-info btn-sm btn-flat platform' data-id='".$row['canid']."'><i class='fa fa-search'></i> View</a>
+                          </td>
+                          <td>
                             <button style=' border-radius: 15px; width: 70%; font-size: 20px;' class=' btn btn-success btn-sm voting btn-flat' data-id='".$row['description']."'><i class='fa fa-check-square'></i> Join </button>
-
                           </td>
                         </tr>
                       ";
@@ -121,6 +124,12 @@
             getRow(id);
         });
 
+        $(document).on('click', '.platform', function(e){
+            e.preventDefault();
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
         var addNumeration = function(cl){
             var table = document.querySelector('table.' + cl)
             var trs = table.querySelectorAll('tr')
@@ -146,16 +155,18 @@
     function getRow(id){
         $.ajax({
             type: 'POST',
-            url: 'voters_row.php',
+            url: 'candidates_row.php',
             data: {id:id},
             dataType: 'json',
             success: function(response){
-                $('.id').val(response.id);
+                $('.id').val(response.canid);
                 $('#edit_firstname').val(response.firstname);
                 $('#edit_lastname').val(response.lastname);
-                $('#edit_password').val(response.password);
+                $('#posselect').val(response.position_id).html(response.description);
+                $('#edit_platform').val(response.platform);
                 $('.fullname').html(response.firstname+' '+response.lastname);
-                $('.description').val(response.description);
+                $('#desc').html(response.platform);
+                $('.title').html(response.description);
             }
         });
     }

@@ -130,7 +130,7 @@ $(function(){
 function getRow(id){
   $.ajax({
     type: 'POST',
-    url: 'candidates_row.php',
+    url: 'candidates_platform.php',
     data: {id:id},
     dataType: 'json',
     success: function(response){

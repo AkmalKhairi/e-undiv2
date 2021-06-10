@@ -1,12 +1,25 @@
 <?php 
 	include 'includes/session.php';
+$userid = $_POST['userid'];
 
-	if(isset($_POST['id'])){
-		$id = $_POST['id'];
-		$sql = "SELECT *, candidates.id AS canid FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE candidates.id = '$id'";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+$sql = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE positions.id=".$userid;
+$result = mysqli_query($conn,$sql) or die( mysqli_error($conn));
 
-		echo json_encode($row);
-	}
+$response = "<table border='0' width='100%'>";
+while( $row = mysqli_fetch_array($result) ){
+    $image = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/profile.jpg';
+    $fname = $row['firstname'];
+    $lname = $row['lastname'];
+
+    $response .= "<tr>";
+    $response .= "<td><span style='padding-left: 50px;'><img src='".$image."' width='80px' height='80px'></td>";
+    $response .= "<td style='padding-left: 50px; font-size: 20px;'> Name :".$fname.' '.$lname."</span></td>";
+    $response .= "</tr>";
+
+
+}
+$response .= "</table>";
+
+echo $response;
+exit;
 ?>

@@ -49,7 +49,7 @@
                       <select class="form-control" id="position" name="position" required>
                         <option value="" selected>- Select -</option>
                         <?php
-                          $sql = "SELECT * FROM positions";
+                          $sql = "SELECT * FROM positions WHERE status = 'Ongoing'";
                           $query = $conn->query($sql);
                           while($row = $query->fetch_assoc()){
                             echo "

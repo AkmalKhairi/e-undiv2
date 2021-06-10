@@ -1,8 +1,12 @@
 <?php include 'includes/session.php'; ?>
 <?php include 'includes/slugify.php'; ?>
 <?php include 'includes/header.php'; ?>
+<link href='bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+<!-- Script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
 <body class="hold-transition skin-yellow sidebar-mini">
-<div class="wrapper">
+<div  class="wrapper">
 
     <?php include 'includes/navbar.php'; ?>
     <?php include 'includes/menubar.php'; ?>
@@ -22,17 +26,46 @@
 
         <!-- Main content -->
         <section class="content">
-            <div style="padding-top: 80px;" class="row">
+            <div  style="padding-top: 80px;" class="row">
                 <div class="col-sm-10 col-sm-offset-1">
 
                     <?php
-                    $sql = "SELECT * FROM votes WHERE voters_id = '".$voter['id']."'";
+                    $sql = "SELECT * FROM votes";
                     $vquery = $conn->query($sql);
                     if($vquery->num_rows > 0){
                         ?>
-                        <div class="text-center">
+                        <div style="overflow-y: hidden;" class="text-center">
                             <h3>You have already voted for this election.</h3>
-                            <a style="padding: 10px 24px; " href="#view" data-toggle="modal" class="btn btn-flat btn-info btn-lg center">View Ballot</a>
+                            <div class="modal fade" id="empModal" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">User Info</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                        </div>
+                                        <div class="modal-body">
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <?php
+                            $query = "SELECT * FROM votes LEFT JOIN candidates ON candidates.id=votes.candidate_id LEFT JOIN voters ON voters.id=votes.voters_id LEFT JOIN positions ON positions.id=votes.position_id where votes.voters_id = '".$voter['id']."' ";
+                            $result = $conn->query($query) or die($conn->error);
+                            while($row = $result->fetch_assoc()){
+                                $id = $row['id'];
+                                echo "<a style='border-radius: 15px; margin: 10px; font-size: large;' class='btn btn-info btn-sm btn-flat userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>";
+                                /*                    echo "<td><button data-id='".$id."' class='userinfo'>Info</button></td>";*/
+                            }
+                            ?>
                             <?php
                             $sql = "SELECT * FROM positions ORDER BY priority ASC";
                             $query = $conn->query($sql);
@@ -73,7 +106,8 @@
 
 
                             $candidate = '';
-                            $sql = "SELECT * FROM positions ORDER BY priority ASC";
+                            $status = "Ongoing";
+                            $sql = "SELECT * FROM positions WHERE status = '$status' ORDER BY priority ASC";
                             $query = $conn->query($sql);
                             while($row = $query->fetch_assoc()){
                                 $sql = "SELECT * FROM candidates WHERE position_id='".$row['id']."'";
@@ -134,8 +168,8 @@
 
                             ?>
                             <div class="text-center">
-                                <!-- <button type="button" class="btn btn-success btn-flat" id="preview"><i class="fa fa-file-text"></i> Preview</button>
-                         -->	<button style="padding: 14px 28px; width: 100%; font-size: 20px;" type="submit" class="btn btn-success btn-flat" name="vote">
+<!--                                 <button type="button" class="btn btn-success btn-flat" id="preview"><i class="fa fa-file-text"></i> Preview</button>
+-->                         	<button style="padding: 14px 28px; width: 100%; font-size: 20px;" type="submit" class="btn btn-success btn-flat" name="vote">
                                     <i class="fa fa-check-square-o"></i> Submit</button>
                             </div>
                         </form>
@@ -146,9 +180,32 @@
                     ?>
 
                 </div>
-            </div>
+                <script type='text/javascript'>
+                    $(document).ready(function(){
+
+                        $('.userinfo').click(function(){
+
+                            var userid = $(this).data('id');
+
+                            // AJAX request
+                            $.ajax({
+                                url: 'ballot_row.php',
+                                type: 'post',
+                                data: {userid: userid},
+                                success: function(response){
+                                    // Add response in Modal body
+                                    $('.modal-body').html(response);
+
+                                    // Display Modal
+                                    $('#empModal').modal('show');
+                                }
+                            });
+                        });
+                    });
+                </script>
         </section>
         <!-- right col -->
+
     </div>
     <?php include 'includes/footer.php'; ?>
     <?php include 'includes/ballot_modal.php'; ?>

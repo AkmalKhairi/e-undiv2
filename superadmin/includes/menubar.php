@@ -15,8 +15,16 @@
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header"></li>
       <li class=""><a href="home.php"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
-      <li class=""><a href="voters.php"><span class="glyphicon glyphicon-user"></span> <span>Admin</span></a></li><li class=""><a href="election.php"><span class="fa fa-check"></span> <span> Election</span></a></li>
-    </ul>
+      <li class=""><a href="admin.php"><span class="glyphicon glyphicon-user"></span> <span>Admin</span></a></li>
+        <ul>
+            <li class=""><a href="admin_not.php"><span class="glyphicon glyphicon-time"></span> <span>Admin Pending List</span></a></li>
+        </ul>
+        <li class=""><a href="voters.php"><span class="glyphicon glyphicon-user"></span> <span>Voter</span></a></li>
+        <ul>
+            <li class=""><a href="voters_not.php"><span class="glyphicon glyphicon-time"></span> <span>Voter Pending List</span></a></li>
+        <!--</ul>
+      <li class=""><a href="election.php"><span class="fa fa-check"></span> <span> Election</span></a></li>
+    </ul>-->
   </section>
   <!-- /.sidebar -->
 </aside>

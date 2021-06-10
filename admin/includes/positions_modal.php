@@ -95,6 +95,32 @@
     </div>
 </div>
 
+<!--End Vote-->
+<div class="modal fade" id="status">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>End Voting Session</b></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="POST" action="positions_status.php">
+                    <input type="hidden" class="id" name="id">
+                    <div class="text-center">
+                        <p>CONFIRM TO END <h2 class="bold description"></h2></p>
+
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                <button type="submit" class="btn btn-success btn-flat" name="status"><i class="fa fa-thumbs-up"></i> Confirm</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
      

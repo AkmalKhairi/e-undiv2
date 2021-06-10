@@ -5,10 +5,10 @@
 <div class="wrapper">
 
     <head>
-        <script src="https://code.highcharts.com/highcharts.js"></script>
-        <script src="https://code.highcharts.com/modules/exporting.js"></script>
-        <script src="https://code.highcharts.com/modules/export-data.js"></script>
-        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <!--BarGraph-->
+        <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <!--BarGraph-->
     </head>
 
     <?php include 'includes/navbar.php'; ?>
@@ -29,28 +29,7 @@
 
         <!-- Main content -->
         <section class="content">
-            <?php
-            if(isset($_SESSION['error'])){
-                echo "
-            <div class='alert alert-danger alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-warning'></i> Error!</h4>
-              ".$_SESSION['error']."
-            </div>
-          ";
-                unset($_SESSION['error']);
-            }
-            if(isset($_SESSION['success'])){
-                echo "
-            <div class='alert alert-success alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-check'></i> Success!</h4>
-              ".$_SESSION['success']."
-            </div>
-          ";
-                unset($_SESSION['success']);
-            }
-            ?>
+
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-lg-3 col-xs-6">
@@ -145,13 +124,61 @@
                 </div>
             </div>
 
+            <!--GRAPH BAR-->
+            <div align="center">
+                <?php
+                $sql ="SELECT description, Count(position_id) as total FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id GROUP BY position_id";
+                $result = mysqli_query($conn,$sql);
+                $chart_data="";
+                while ($row = mysqli_fetch_array($result)) {
 
-            <figure class="highcharts-figure">
-                <div id="container"></div>
-                <p class="highcharts-description">
-                    Chart showing data updating every second, with old data being removed.
-                </p>
-            </figure>
+                    $description[]  = $row['description']  ;
+                    $total[] = $row['total'];
+                }
+                ?>
+                <div style="width:30%;hieght:20%;text-align:center">
+                    <h2 class="page-header" >Election Reports </h2>
+                    <div>Product </div>
+                    <canvas  id="chartjs_bar"></canvas>
+                </div>
+
+            <script type="text/javascript">
+                var ctx = document.getElementById("chartjs_bar").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels:<?php echo json_encode($description); ?>,
+                        datasets: [{
+                            backgroundColor: [
+                                "#5969ff",
+                                "#ff407b",
+                                "#25d5f2",
+                                "#ffc750",
+                                "#2ec551",
+                                "#7040fa",
+                                "#ff004e"
+                            ],
+                            data:<?php echo json_encode($total); ?>,
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+
+                            labels: {
+                                fontColor: '#71748d',
+                                fontFamily: 'Circular Std Book',
+                                fontSize: 14,
+                            }
+                        },
+
+
+                    }
+                });
+            </script>
+            </div>
+            <!--GRAPH BAR-->
 
         </section>
         <!-- right col -->
@@ -163,96 +190,7 @@
 
 <?php include 'includes/scripts.php'; ?>
 
-<script>
-    Highcharts.chart('container', {
-        chart: {
-            type: 'spline',
-            animation: Highcharts.svg, // don't animate in old IE
-            marginRight: 10,
-            events: {
-                load: function() {
 
-                    // set up the updating of the chart each second
-                    var series = this.series[0];
-                    setInterval(function() {
-                        var x = (new Date()).getTime(), // current time
-                            y = Math.random();
-                        series.addPoint([x, y], true, true);
-                    }, 1000);
-                }
-            }
-        },
-
-        time: {
-            useUTC: false
-        },
-
-        title: {
-            text: 'Live random data'
-        },
-
-        accessibility: {
-            announceNewData: {
-                enabled: true,
-                minAnnounceInterval: 15000,
-                announcementFormatter: function(allSeries, newSeries, newPoint) {
-                    if (newPoint) {
-                        return 'New point added. Value: ' + newPoint.y;
-                    }
-                    return false;
-                }
-            }
-        },
-
-        xAxis: {
-            type: 'datetime',
-            tickPixelInterval: 150
-        },
-
-        yAxis: {
-            title: {
-                text: 'Value'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-
-        tooltip: {
-            headerFormat: '<b>{series.name}</b><br/>',
-            pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
-        },
-
-        legend: {
-            enabled: false
-        },
-
-        exporting: {
-            enabled: false
-        },
-
-        series: [{
-            name: 'Random data',
-            data: (function() {
-                // generate an array of random data
-                var data = [],
-                    time = (new Date()).getTime(),
-                    i;
-
-                for (i = -19; i <= 0; i += 1) {
-                    data.push({
-                        x: time + i * 1000,
-                        y: Math.random()
-                    });
-                }
-                return data;
-            }())
-        }]
-    });
-
-</script>
 
 </body>
 </html>

@@ -17,11 +17,11 @@ if(isset($_SESSION['admin'])){
 
         <form action="login.php" method="POST">
             <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="username" placeholder="Username" required>
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                <input placeholder="Last 4-Digits of NRIC" type="text" maxlength="4" onkeypress="return onlyNumberKey(event)" class="form-control" id="admin" name="admin" required>                <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
-                <input type="password" class="form-control" name="password" placeholder="Password" required>
+                <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
+                <input type="checkbox" onclick="viewPassword()"> Show Password
                 <span class="glyphicon glyphicon-asterisk form-control-feedback"></span>
             </div>
             <div class="row">
@@ -33,6 +33,7 @@ if(isset($_SESSION['admin'])){
     </div>
     <div class="row">
         <p style="padding-left: 80px;"> No Account yet? <a href="#addnew" data-toggle="modal"> REGISTER HERE</a></p>
+        <a style="padding-left: 90px;" href="verification.php"> Account Verification Status </a>
     </div>
     <!--<div class="row">
         <div class="col-md-6 column">
@@ -51,8 +52,30 @@ if(isset($_SESSION['admin'])){
     ?>
 </div>
 
+<script>
+    function onlyNumberKey(evt) {
+
+        // Only ASCII charactar in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+
+    function viewPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+</script>
+
 <?php include 'includes/scripts.php' ?>
 <?php include 'includes/admin_modal.php'; ?>
+
 
 
 </body>

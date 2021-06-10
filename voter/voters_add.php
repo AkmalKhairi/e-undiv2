@@ -33,11 +33,9 @@ if(isset($_POST['add'])){
             $_SESSION['error'] = $conn->error;
         }
     }
-
-
 }
 else{
-    $_SESSION['error'] = 'Fill up add form first';
+    $_SESSION['error'] = 'Fill up the form first';
 }
 header('location: index.php');
 ?>

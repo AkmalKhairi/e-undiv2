@@ -1,6 +1,10 @@
 <?php include 'includes/session.php'; ?>
 <?php include 'includes/slugify.php'; ?>
 <?php include 'includes/header.php'; ?>
+<link href='bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+<!-- Script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
 <body class="hold-transition skin-black-light sidebar-mini">
 <div class="wrapper">
 
@@ -22,111 +26,96 @@
 
     <!-- Main content -->
     <section class="content">
-      <?php
-        if(isset($_SESSION['error'])){
-          echo "
-            <div class='alert alert-danger alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-warning'></i> Error!</h4>
-              ".$_SESSION['error']."
-            </div>
-          ";
-          unset($_SESSION['error']);
-        }
-        if(isset($_SESSION['success'])){
-          echo "
-            <div class='alert alert-success alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-check'></i> Success!</h4>
-              ".$_SESSION['success']."
-            </div>
-          ";
-          unset($_SESSION['success']);
-        }
-      ?>
-      <!-- Small boxes (Stat box) -->
-      <div class="row">
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-aqua">
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM positions";
-                $query = $conn->query($sql);
 
-                echo "<h3>".$query->num_rows."</h3>";
-              ?>
+        <div class="modal fade" id="empModal" role="dialog">
+            <div class="modal-dialog">
 
-              <p>No. of Positions</p>
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Candidates</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
             </div>
-            <div class="icon">
-              <i class="fa fa-tasks"></i>
-            </div>
-            <a href="positions.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-green">
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM candidates";
-                $query = $conn->query($sql);
 
-                echo "<h3>".$query->num_rows."</h3>";
-              ?>
-          
-              <p>No. of Candidates</p>
+        <!--TEST-->
+        <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <div class="pull-right">
+                        <a href="home_not.php" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-history"></i> History</a>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <table id="example1" class="table table-bordered">
+                        <thead>
+                        <th style="text-align: center;">Voting Title</th>
+                        <th style="text-align: center;">Status</th>
+                        <th style="text-align: center;">Candidates</th>
+                        <th style="text-align: center;">Result</th>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE positions.status = 'Ongoing' GROUP BY positions.priority DESC";
+                        $result = mysqli_query($conn,$query);
+                        while($row = mysqli_fetch_array($result)){
+                            $id = $row['id'];
+                            $description = $row['description'];
+                            echo "
+                        <tr>
+                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
+                          <td style='padding-left: 100px;'>".$row['status']."</td>
+                          <td>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          </td>
+                          <td>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          </td>
+                        </tr>
+                      ";
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                    <script type='text/javascript'>
+                        $(document).ready(function(){
+
+                            $('.userinfo').click(function(){
+
+                                var userid = $(this).data('id');
+
+                                // AJAX request
+                                $.ajax({
+                                    url: 'candidates_row.php',
+                                    type: 'post',
+                                    data: {userid: userid},
+                                    success: function(response){
+                                        // Add response in Modal body
+                                        $('.modal-body').html(response);
+
+                                        // Display Modal
+                                        $('#empModal').modal('show');
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+                </div>
             </div>
-            <div class="icon">
-              <i class="fa fa-black-tie"></i>
-            </div>
-            <a href="candidates.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-yellow">
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM voters";
-                $query = $conn->query($sql);
-
-                echo "<h3>".$query->num_rows."</h3>";
-              ?>
-             
-              <p>Total Voters</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-users"></i>
-            </div>
-            <a href="voters.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
         </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-xs-6">
-          <!-- small box -->
-          <div class="small-box bg-red">
-            <div class="inner">
-              <?php
-                $sql = "SELECT * FROM votes GROUP BY voters_id";
-                $query = $conn->query($sql);
-
-                echo "<h3>".$query->num_rows."</h3>";
-              ?>
-
-              <p>Voters Voted</p>
-            </div>
-            <div class="icon">
-              <i class="fa fa-edit"></i>
-            </div>
-            <a href="votes.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
+        <!--TEST-->
 
       <div class="row">
         <div class="col-xs-12">
@@ -139,11 +128,11 @@
       </div>
 
       <?php
-        $sql = "SELECT * FROM positions ORDER BY priority ASC";
+/*        $sql = "SELECT * FROM positions ORDER BY priority ASC";
         $query = $conn->query($sql);
         $inc = 2;
         while($row = $query->fetch_assoc()){
-          $inc = ($inc == 2) ? 1 : $inc+1; 
+          $inc = ($inc == 2) ? 1 : $inc+1;
           if($inc == 1) echo "<div class='row'>";
           echo "
             <div class='col-sm-6'>
@@ -159,93 +148,19 @@
               </div>
             </div>
           ";
-          if($inc == 2) echo "</div>";  
+          if($inc == 2) echo "</div>";
         }
         if($inc == 1) echo "<div class='col-sm-6'></div></div>";
-      ?>
+      */?>
 
       </section>
       <!-- right col -->
     </div>
   	<?php include 'includes/footer.php'; ?>
-
 </div>
 <!-- ./wrapper -->
 
 <?php include 'includes/scripts.php'; ?>
-<?php
-  $sql = "SELECT * FROM positions ORDER BY priority ASC";
-  $query = $conn->query($sql);
-  while($row = $query->fetch_assoc()){
-    $sql = "SELECT * FROM candidates WHERE position_id = '".$row['id']."'";
-    $cquery = $conn->query($sql);
-    $carray = array();
-    $varray = array();
-    while($crow = $cquery->fetch_assoc()){
-      array_push($carray, $crow['firstname']);
-      $sql = "SELECT * FROM votes WHERE candidate_id = '".$crow['id']."'";
-      $vquery = $conn->query($sql);
-      array_push($varray, $vquery->num_rows);
-    }
-    $carray = json_encode($carray);
-    $varray = json_encode($varray);
-    ?>
-    <script>
-    $(function(){
-      var rowid = '<?php echo $row['id']; ?>';
-      var description = '<?php echo slugify($row['description']); ?>';
-      var barChartCanvas = $('#'+description).get(0).getContext('2d')
-      var barChart = new Chart(barChartCanvas)
-      var barChartData = {
-        labels  : <?php echo $carray; ?>,
-        datasets: [
-          {
-            label               : 'Votes',
-            fillColor           : 'rgba(60,141,188,0.9)',
-            strokeColor         : 'rgba(60,141,188,0.8)',
-            pointColor          : '#3b8bba',
-            pointStrokeColor    : 'rgba(60,141,188,1)',
-            pointHighlightFill  : '#fff',
-            pointHighlightStroke: 'rgba(60,141,188,1)',
-            data                : <?php echo $varray; ?>
-          }
-        ]
-      }
-      var barChartOptions                  = {
-        //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-        scaleBeginAtZero        : true,
-        //Boolean - Whether grid lines are shown across the chart
-        scaleShowGridLines      : true,
-        //String - Colour of the grid lines
-        scaleGridLineColor      : 'rgba(0,0,0,.05)',
-        //Number - Width of the grid lines
-        scaleGridLineWidth      : 1,
-        //Boolean - Whether to show horizontal lines (except X axis)
-        scaleShowHorizontalLines: true,
-        //Boolean - Whether to show vertical lines (except Y axis)
-        scaleShowVerticalLines  : true,
-        //Boolean - If there is a stroke on each bar
-        barShowStroke           : true,
-        //Number - Pixel width of the bar stroke
-        barStrokeWidth          : 2,
-        //Number - Spacing between each of the X value sets
-        barValueSpacing         : 5,
-        //Number - Spacing between data sets within X values
-        barDatasetSpacing       : 1,
-        //String - A legend template
-        legendTemplate          : '<ul class="<%=name.toLowerCase()%>-legend"><% for (var i=0; i<datasets.length; i++){%><li><span style="background-color:<%=datasets[i].fillColor%>"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
-        //Boolean - whether to make the chart responsive
-        responsive              : true,
-        maintainAspectRatio     : true
-      }
 
-      barChartOptions.datasetFill = false
-      var myChart = barChart.HorizontalBar(barChartData, barChartOptions)
-      //document.getElementById('legend_'+rowid).innerHTML = myChart.generateLegend();
-    });
-    </script>
-    <?php
-  }
-?>
 </body>
 </html>

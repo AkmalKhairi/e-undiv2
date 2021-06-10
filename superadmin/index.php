@@ -21,8 +21,9 @@
         		<span class="glyphicon glyphicon-user form-control-feedback"></span>
       		</div>
           <div class="form-group has-feedback">
-            <input type="password" class="form-control" name="password" placeholder="Password" required>
-            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
+              <input type="checkbox" onclick="viewPassword()">Show Password
+              <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
       		<div class="row">
     			<div class="col-xs-4">
@@ -42,7 +43,28 @@
   		}
   	?>
 </div>
+<script>
+    function onlyNumberKey(evt) {
+
+        // Only ASCII charactar in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+
+    function viewPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+</script>
 	
 <?php include 'includes/scripts.php' ?>
+
 </body>
 </html>
