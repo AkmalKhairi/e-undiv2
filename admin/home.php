@@ -80,7 +80,7 @@
                           <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                           <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                         </tr>
                       ";
@@ -109,6 +109,24 @@
                                     }
                                 });
                             });
+                            $('.userresult').click(function(){
+
+                                var userid = $(this).data('id');
+
+                                // AJAX request
+                                $.ajax({
+                                    url: 'candidates_result.php',
+                                    type: 'post',
+                                    data: {userid: userid},
+                                    success: function(response){
+                                        // Add response in Modal body
+                                        $('.modal-body').html(response);
+
+                                        // Display Modal
+                                        $('#empModal').modal('show');
+                                    }
+                                });
+                            });
                         });
                     </script>
                 </div>
@@ -117,7 +135,7 @@
         </div>
         <!--TEST-->
 
-      <div class="row">
+      <!--<div class="row">
         <div class="col-xs-12">
           <h3>Votes Tally
             <span class="pull-right">
@@ -125,7 +143,7 @@
             </span>
           </h3>
         </div>
-      </div>
+      </div>-->
 
       <?php
 /*        $sql = "SELECT * FROM positions ORDER BY priority ASC";

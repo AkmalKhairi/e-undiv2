@@ -86,7 +86,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+           
           ";
                                 if($inc == 2) echo "</div>";
                             }

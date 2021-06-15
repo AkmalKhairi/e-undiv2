@@ -5,6 +5,12 @@
 <!-- Script -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
+<head>
+    <!--BarGraph-->
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <!--BarGraph-->
+</head>
 <body class="hold-transition skin-yellow sidebar-mini">
 <div class="wrapper">
 
@@ -52,13 +58,13 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
-
                         <div class="box-body">
                             <table id="example1" class="table table-bordered">
                                 <thead>
                                 <th style="text-align: center;">Voting Title</th>
                                 <th style="text-align: center;">Candidates</th>
                                 <th style="text-align: center;">Result</th>
+                                <th style="text-align: center;">Voting</th>
                                 </thead>
                                 <tbody>
                                 <?php
@@ -74,7 +80,10 @@
                           <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                           <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          </td>
+                          <td>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block uservoting' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                         </tr>
                       ";
@@ -91,7 +100,45 @@
 
                                         // AJAX request
                                         $.ajax({
-                                            url: 'candidates_row.php',
+                                            url: 'candidates_join.php',
+                                            type: 'post',
+                                            data: {userid: userid},
+                                            success: function(response){
+                                                // Add response in Modal body
+                                                $('.modal-body').html(response);
+
+                                                // Display Modal
+                                                $('#empModal').modal('show');
+                                            }
+                                        });
+                                    });
+
+                                    $('.userresult').click(function(){
+
+                                        var userid = $(this).data('id');
+
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'candidates_result.php',
+                                            type: 'post',
+                                            data: {userid: userid},
+                                            success: function(response){
+                                                // Add response in Modal body
+                                                $('.modal-body').html(response);
+
+                                                // Display Modal
+                                                $('#empModal').modal('show');
+                                            }
+                                        });
+                                    });
+
+                                    $('.uservoting').click(function(){
+
+                                        var userid = $(this).data('id');
+
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'candidates_voting.php',
                                             type: 'post',
                                             data: {userid: userid},
                                             success: function(response){
@@ -146,7 +193,41 @@
                     }
                     if($inc == 1) echo "<div class='col-sm-6'></div></div>";
                   */?>
+            <script type="text/javascript">
+                var ctx = document.getElementById("chartjs_bar").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels:<?php echo json_encode($description); ?>,
+                        datasets: [{
+                            backgroundColor: [
+                                "#5969ff",
+                                "#ff407b",
+                                "#25d5f2",
+                                "#ffc750",
+                                "#2ec551",
+                                "#7040fa",
+                                "#ff004e"
+                            ],
+                            data:<?php echo json_encode($total); ?>,
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
 
+                            labels: {
+                                fontColor: '#71748d',
+                                fontFamily: 'Circular Std Book',
+                                fontSize: 14,
+                            }
+                        },
+
+
+                    }
+                });
+            </script>
         </section>
         <!-- right col -->
     </div>

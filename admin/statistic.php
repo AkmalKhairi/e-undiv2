@@ -138,7 +138,7 @@
                 ?>
                 <div style="width:30%;hieght:20%;text-align:center">
                     <h2 class="page-header" >Election Reports </h2>
-                    <div>Product </div>
+                    <div>Election </div>
                     <canvas  id="chartjs_bar"></canvas>
                 </div>
 
