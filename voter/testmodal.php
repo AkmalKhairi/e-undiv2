@@ -68,11 +68,13 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id GROUP BY positions.priority DESC";
+                                /*UPDATE WHERE CLAUSE*/
+                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE candidates.candidate_id =! '".$voter['id']."' GROUP BY positions.priority DESC";
                                 $result = mysqli_query($conn,$query);
                                 while($row = mysqli_fetch_array($result)){
                                     $id = $row['id'];
                                     $description = $row['description'];
+                                if ($row['status'] == 'Ongoing'){
                                     echo "
                         <tr>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
@@ -86,7 +88,23 @@
                           <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block uservoting' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                         </tr>
+                      ";}
+                                elseif ($row['status'] == 'Finish'){
+                                    echo "
+                        <tr>
+                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
+                          <td>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          </td>
+                          <td>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          </td>
+                          <td>
+                          <a style='border-radius: 15px;' class='btn btn-warning btn-sm btn-flat btn-block disabled uservoting' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          </td>
+                        </tr>
                       ";
+                                }
                                 }
                                 ?>
                                 </tbody>

@@ -4,39 +4,25 @@ include 'includes/slugify.php';
 include 'includes/ballot_modal.php';
 
 $userid = $_POST['userid'];
-$sql = "SELECT * FROM votes WHERE positions.id=".$userid."'";
-$vquery = $conn->query($sql);
-if($vquery->num_rows > 0){
+$sql = "SELECT *,candidates.firstname AS canfirst, candidates.lastname AS canlast FROM votes LEFT JOIN candidates ON candidates.id=votes.candidate_id LEFT JOIN positions ON positions.id=votes.position_id WHERE positions.id='$userid'";
+$result = mysqli_query($conn,$sql) or die( mysqli_error($conn));
+if($result->num_rows > 0){
+while( $row = mysqli_fetch_array($result) ){
+    $image = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/profile.jpg';
+    $fname = $row['firstname'];
+    $lname = $row['lastname'];
+    $dsc = $row['description'];
+    echo "<div class='row votelist'>
+                     <span style='padding-left: 50px;' class='col-sm-4'> <img src='".$image."' width='100px' height='100px'> </span>
+                      <span style='padding-left: 70px; font-size: 30px;' class='col-sm-8'><b>".$dsc.":</b></span>
+                      <span style='padding-left: 70px; font-size: 30px;' class='col-sm-8'><b>".$fname.' '.$lname."</b></span>
+                    </div>";
+    }
+
+
     ?>
     <div class="text-center">
         <h3>You have already voted for this election.</h3>
-
-<?
-$sql = "SELECT * FROM positions WHERE positions.id=".$userid." ORDER BY priority ASC" ;
-$query = $conn->query($sql);
-$inc = 2;
-while($row = $query->fetch_assoc()){
-    $inc = ($inc == 2) ? 1 : $inc+1;
-    if($inc == 1) echo "<div class='row'>";
-    echo "
-              <div class='box box-solid'>
-                <div class='box-header with-border'>
-                                  <h3> Voting Name: </h3>
-                  <h3 class='box-title'><b>".$row['description']."</b></h3>
-                </div>
-                <div class='box-body'>
-                  <div class='chart'>
-                    <canvas  id='".slugify($row['description'])."' style='height:300px'> </canvas>
-                    
-                  </div>
-                </div>
-              </div>
-           
-          ";
-    if($inc == 2) echo "</div>";
-}
-if($inc == 1) echo "<div class='col-sm-6'></div></div>";
-?>
 
 
 
@@ -49,12 +35,12 @@ else{
     <form method="POST" id="ballotForm" action="submit_ballot.php">
         <?php
 
-
+        $userid = $_POST['userid'];
         $candidate = '';
         $status = "Ongoing";
-        $sql = "SELECT * FROM positions WHERE status = '$status' ORDER BY priority ASC";
-        $query = $conn->query($sql);
-        while($row = $query->fetch_assoc()){
+        $sql = "SELECT * FROM positions WHERE status = '$status' AND positions.id='$userid'";
+        $query = mysqli_query($conn,$sql) or die( mysqli_error($conn));
+        while( $row = mysqli_fetch_array($query) ){
             $sql = "SELECT * FROM candidates WHERE position_id='".$row['id']."'";
             $cquery = $conn->query($sql);
             while($crow = $cquery->fetch_assoc()){

@@ -223,7 +223,7 @@ while($row = $query->fetch_assoc()){
     $carray = array();
     $varray = array();
     while($crow = $cquery->fetch_assoc()){
-        array_push($carray, $crow['lastname']);
+        array_push($carray, $crow['firstname']);
         $sql = "SELECT * FROM votes WHERE candidate_id = '".$crow['id']."'";
         $vquery = $conn->query($sql);
         array_push($varray, $vquery->num_rows);

@@ -24,7 +24,7 @@
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-              <h4 class="modal-title"><b>Add New Candidate</b></h4>
+              <h4 class="modal-title"><b>Register as Candidate</b></h4>
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="candidates_add.php" enctype="multipart/form-data">
@@ -32,16 +32,23 @@
                     <label for="firstname" class="col-sm-3 control-label">Firstname</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="firstname" name="firstname" required>
+                      <input type="text" class="form-control" id="firstname" name="firstname" disabled value="<?php echo $voter['firstname']; ?>">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="lastname" class="col-sm-3 control-label">Lastname</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="lastname" name="lastname" required>
+                      <input type="text" class="form-control" id="lastname" name="lastname" disabled value="<?php echo $voter['lastname']; ?>">
                     </div>
                 </div>
+                  <div class="form-group">
+                      <label for="nric" class="col-sm-3 control-label">ID</label>
+
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" id="nric" name="nric" disabled value="<?php echo $voter['voters_id']; ?>">
+                      </div>
+                  </div>
                 <div class="form-group">
                     <label for="position" class="col-sm-3 control-label">Position</label>
 
@@ -49,7 +56,7 @@
                       <select class="form-control" id="position" name="position" required>
                         <option value="" selected>- Select -</option>
                         <?php
-                          $sql = "SELECT * FROM positions";
+                          $sql = "SELECT * FROM positions WHERE status = 'Pending'";
                           $query = $conn->query($sql);
                           while($row = $query->fetch_assoc()){
                             echo "

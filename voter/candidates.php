@@ -1,149 +1,266 @@
 <?php include 'includes/session.php'; ?>
+<?php include 'includes/slugify.php'; ?>
 <?php include 'includes/header.php'; ?>
+<link href='bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+<!-- Script -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src='bootstrap/js/bootstrap.bundle.min.js' type='text/javascript'></script>
+<head>
+    <!--BarGraph-->
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <!--BarGraph-->
+</head>
 <body class="hold-transition skin-yellow sidebar-mini">
 <div class="wrapper">
 
-  <?php include 'includes/navbar.php'; ?>
-  <?php include 'includes/menubar.php'; ?>
+    <?php include 'includes/navbar.php'; ?>
+    <?php include 'includes/menubar.php'; ?>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Candidates List
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Candidates</li>
-      </ol>
-    </section>
-    <!-- Main content -->
-    <section class="content">
-      <?php
-        if(isset($_SESSION['error'])){
-          echo "
-            <div class='alert alert-danger alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-warning'></i> Error!</h4>
-              ".$_SESSION['error']."
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Dashboard
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="modal fade" id="empModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Candidates</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-          ";
-          unset($_SESSION['error']);
-        }
-        if(isset($_SESSION['success'])){
-          echo "
-            <div class='alert alert-success alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-check'></i> Success!</h4>
-              ".$_SESSION['success']."
-            </div>
-          ";
-          unset($_SESSION['success']);
-        }
-      ?>
-      <div class="row">
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header with-border">
-              <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
-            </div>
-            <div class="box-body">
-              <table id="example1" class="table table-bordered">
-                <thead>
-                  <th class="hidden"></th>
-                  <th>Position</th>
-                  <th>Photo</th>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>Platform</th>
-                  <th>Tools</th>
-                </thead>
-                <tbody>
-                  <?php
-                    $sql = "SELECT *, candidates.id AS canid FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id ORDER BY positions.priority ASC";
-                    $query = $conn->query($sql);
-                    while($row = $query->fetch_assoc()){
-                      $image = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/profile.jpg';
-                      echo "
+
+            <!--TEST-->
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <div class="pull-right">
+                                <a href="#addnew" data-toggle="modal" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table id="example1" class="table table-bordered">
+                                <thead>
+                                <th style="text-align: center;">Voting Title</th>
+                                <th style="text-align: center;">Candidates</th>
+                                <th style="text-align: center;">Result</th>
+                                <th style="text-align: center;">Voting</th>
+                                </thead>
+                                <tbody>
+                                <?php
+                                /*UPDATE WHERE CLAUSE*/
+                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE candidates.candidate_id = '".$voter['voters_id']."' GROUP BY positions.priority DESC";
+                                $result = mysqli_query($conn,$query);
+                                while($row = mysqli_fetch_array($result)){
+                                    $id = $row['id'];
+                                    $description = $row['description'];
+                                    if ($row['status'] == 'Ongoing'){
+                                        echo "
                         <tr>
-                          <td class='hidden'></td>
-                          <td>".$row['description']."</td>
+                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
                           <td>
-                            <img src='".$image."' width='30px' height='30px'>
-                            <a href='#edit_photo' data-toggle='modal' class='pull-right photo' data-id='".$row['canid']."'><span class='fa fa-edit'></span></a>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
-                          <td>".$row['firstname']."</td>
-                          <td>".$row['lastname']."</td>
-                          <td><a href='#platform' data-toggle='modal' class='btn btn-info btn-sm btn-flat platform' data-id='".$row['canid']."'><i class='fa fa-search'></i> View</a></td>
                           <td>
-                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['canid']."'><i class='fa fa-edit'></i> Edit</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['canid']."'><i class='fa fa-trash'></i> Delete</button>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          </td>
+                          <td>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block uservoting' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          </td>
+                        </tr>
+                      ";}
+                                    elseif ($row['status'] == 'Finish'){
+                                        echo "
+                        <tr>
+                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
+                          <td>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          </td>
+                          <td>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          </td>
+                          <td>
+                          <a style='border-radius: 15px;' class='btn btn-warning btn-sm btn-flat btn-block disabled uservoting' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                         </tr>
                       ";
-                    }
-                  ?>
-                </tbody>
-              </table>
+                                    }
+                                }
+                                ?>
+                                </tbody>
+                            </table>
+                            <script type='text/javascript'>
+                                $(document).ready(function(){
+
+                                    $('.userinfo').click(function(){
+
+                                        var userid = $(this).data('id');
+
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'candidates_join.php',
+                                            type: 'post',
+                                            data: {userid: userid},
+                                            success: function(response){
+                                                // Add response in Modal body
+                                                $('.modal-body').html(response);
+
+                                                // Display Modal
+                                                $('#empModal').modal('show');
+                                            }
+                                        });
+                                    });
+
+                                    $('.userresult').click(function(){
+
+                                        var userid = $(this).data('id');
+
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'candidates_result.php',
+                                            type: 'post',
+                                            data: {userid: userid},
+                                            success: function(response){
+                                                // Add response in Modal body
+                                                $('.modal-body').html(response);
+
+                                                // Display Modal
+                                                $('#empModal').modal('show');
+                                            }
+                                        });
+                                    });
+
+                                    $('.uservoting').click(function(){
+
+                                        var userid = $(this).data('id');
+
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'candidates_voting.php',
+                                            type: 'post',
+                                            data: {userid: userid},
+                                            success: function(response){
+                                                // Add response in Modal body
+                                                $('.modal-body').html(response);
+
+                                                // Display Modal
+                                                $('#empModal').modal('show');
+                                            }
+                                        });
+                                    });
+                                });
+                            </script>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>   
-  </div>
-    
-  <?php include 'includes/footer.php'; ?>
-  <?php include 'includes/candidates_modal.php'; ?>
+            <!--TEST-->
+
+            <!--      <div class="row">
+                    <div class="col-xs-12">
+                      <h3>Votes Tally
+                        <span class="pull-right">
+                          <a href="print.php" class="btn btn-success btn-sm btn-flat"><span class="glyphicon glyphicon-print"></span> Print</a>
+                        </span>
+                      </h3>
+                    </div>
+                  </div>-->
+
+            <?php
+            /*        $sql = "SELECT * FROM positions ORDER BY priority ASC";
+                    $query = $conn->query($sql);
+                    $inc = 2;
+                    while($row = $query->fetch_assoc()){
+                      $inc = ($inc == 2) ? 1 : $inc+1;
+                      if($inc == 1) echo "<div class='row'>";
+                      echo "
+                        <div class='col-sm-6'>
+                          <div class='box box-solid'>
+                            <div class='box-header with-border'>
+                              <h4 class='box-title'><b>".$row['description']."</b></h4>
+                            </div>
+                            <div class='box-body'>
+                              <div class='chart'>
+                                <canvas id='".slugify($row['description'])."' style='height:200px'></canvas>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ";
+                      if($inc == 2) echo "</div>";
+                    }
+                    if($inc == 1) echo "<div class='col-sm-6'></div></div>";
+                  */?>
+            <script type="text/javascript">
+                var ctx = document.getElementById("chartjs_bar").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels:<?php echo json_encode($description); ?>,
+                        datasets: [{
+                            backgroundColor: [
+                                "#5969ff",
+                                "#ff407b",
+                                "#25d5f2",
+                                "#ffc750",
+                                "#2ec551",
+                                "#7040fa",
+                                "#ff004e"
+                            ],
+                            data:<?php echo json_encode($total); ?>,
+                        }]
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+
+                            labels: {
+                                fontColor: '#71748d',
+                                fontFamily: 'Circular Std Book',
+                                fontSize: 14,
+                            }
+                        },
+
+
+                    }
+                });
+            </script>
+        </section>
+        <!-- right col -->
+    </div>
+    <?php include 'includes/footer.php'; ?>
+    <?php include 'includes/candidates_modal.php'; ?>
+
 </div>
+<!-- ./wrapper -->
+
 <?php include 'includes/scripts.php'; ?>
-<script>
-$(function(){
-  $(document).on('click', '.edit', function(e){
-    e.preventDefault();
-    $('#edit').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
 
-  $(document).on('click', '.delete', function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $(document).on('click', '.photo', function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $(document).on('click', '.platform', function(e){
-    e.preventDefault();
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-});
-
-function getRow(id){
-  $.ajax({
-    type: 'POST',
-    url: 'candidates_row.php',
-    data: {id:id},
-    dataType: 'json',
-    success: function(response){
-      $('.id').val(response.canid);
-      $('#edit_firstname').val(response.firstname);
-      $('#edit_lastname').val(response.lastname);
-      $('#posselect').val(response.position_id).html(response.description);      
-      $('#edit_platform').val(response.platform);
-      $('.fullname').html(response.firstname+' '+response.lastname);
-      $('#desc').html(response.platform);
-    }
-  });
-}
-</script>
 </body>
 </html>

@@ -148,7 +148,7 @@
                 $('#edit_firstname').val(response.firstname);
                 $('#edit_lastname').val(response.lastname);
                 $('#edit_password').val(response.password);
-                $('.afullname').html(response.firstname+' '+response.lastname);
+                $('.fullname').html(response.firstname+' '+response.lastname);
             }
         });
     }

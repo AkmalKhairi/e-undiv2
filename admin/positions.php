@@ -72,14 +72,24 @@
                           <td>".$row['max_vote']."</td>
                           <td>".$row['status']."</td>
                           ";
-                      if ($row['status'] == 'Ongoing'){
+                      if ($row['status'] == 'Pending'){
+                          echo "
+                          <td>
+                            <button class='btn btn-primary btn-sm pending btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Start Vote</button>                         
+                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
+                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                          </td>
+                        </tr>
+                      ";
+                      }
+                      elseif ($row['status'] == 'Ongoing'){
                           echo "
                           <td>
                             <button class='btn btn-primary btn-sm status btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> End Vote</button>                         
                             <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
                             <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
                           </td>
-                        </tr>
+                        </tr>  
                       ";
                       }
                       elseif ($row['status'] == 'Finish'){
@@ -125,6 +135,13 @@ $(function(){
     $(document).on('click', '.status', function(e){
         e.preventDefault();
         $('#status').modal('show');
+        var id = $(this).data('id');
+        getRow(id);
+    });
+
+    $(document).on('click', '.pending', function(e){
+        e.preventDefault();
+        $('#pending').modal('show');
         var id = $(this).data('id');
         getRow(id);
     });

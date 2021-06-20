@@ -46,7 +46,11 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header with-border">
-              <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+                <div class="pull-right">
+              <a href="#addnew" data-toggle="modal" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+                    <a href="candidates_pending.php" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-clock-o"></i> Pending Candidates</a>
+
+                </div>
             </div>
             <div class="box-body">
               <table id="example1" class="table table-bordered">
@@ -61,7 +65,7 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT *, candidates.id AS canid FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id ORDER BY positions.priority ASC";
+                    $sql = "SELECT *, candidates.id AS canid FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE candidates.status = 'Approve' ORDER BY positions.priority ASC";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       $image = (!empty($row['photo'])) ? '../images/'.$row['photo'] : '../images/profile.jpg';
@@ -134,7 +138,7 @@ function getRow(id){
     data: {id:id},
     dataType: 'json',
     success: function(response){
-      $('.id').val(response.canid);
+      $('.id').val(response.id);
       $('#edit_firstname').val(response.firstname);
       $('#edit_lastname').val(response.lastname);
       $('#posselect').val(response.position_id).html(response.description);      

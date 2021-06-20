@@ -42,6 +42,13 @@
                       <input type="text" class="form-control" id="lastname" name="lastname" required>
                     </div>
                 </div>
+                  <div class="form-group">
+                      <label for="candidate_id" class="col-sm-3 control-label">ID</label>
+
+                      <div class="col-sm-9">
+                          <input type="text" class="form-control" id="candidate_id" name="candidate_id" maxlength="4" required>
+                      </div>
+                  </div>
                 <div class="form-group">
                     <label for="position" class="col-sm-3 control-label">Position</label>
 
@@ -49,7 +56,7 @@
                       <select class="form-control" id="position" name="position" required>
                         <option value="" selected>- Select -</option>
                         <?php
-                          $sql = "SELECT * FROM positions WHERE status = 'Ongoing'";
+                          $sql = "SELECT * FROM positions WHERE status = 'Pending'";
                           $query = $conn->query($sql);
                           while($row = $query->fetch_assoc()){
                             echo "
@@ -195,6 +202,32 @@
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
               <button type="submit" class="btn btn-success btn-flat" name="upload"><i class="fa fa-check-square-o"></i> Update</button>
               </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Approve Candidates -->
+<div class="modal fade" id="approve">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><b>Approve Candidates</b></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal" method="POST" action="candidates_approve.php">
+                    <input type="hidden" class="id" name="id">
+                    <div class="text-center">
+                        <p>APPROVE CANDIDATE</p>
+                        <h2 class="bold fullname"></h2>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                <button type="submit" class="btn btn-success btn-flat" name="approval"><i class="fa fa-thumbs-up"></i> Approve</button>
+                </form>
             </div>
         </div>
     </div>
