@@ -31,6 +31,6 @@ else{
 		$_SESSION['error'] = 'Input voter credentials first';
 	}
 
-	header('location: index.php');
+	header('location: votingtest.php');
 
 ?>

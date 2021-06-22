@@ -22,11 +22,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Dashboard
+                Joined Election
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li class="active">Joined Election</li>
             </ol>
         </section>
 
@@ -58,59 +58,61 @@
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
+                        <!--<div class="box-header with-border">
+                            <div class="pull-right">
+                                <a href="#addnew" data-toggle="modal" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+                            </div>
+                        </div>-->
                         <div class="box-body">
                             <table id="example1" class="table table-bordered">
                                 <thead>
                                 <th style="text-align: center;">Voting Title</th>
+                                <th style="text-align: center;">Status</th>
                                 <th style="text-align: center;">Candidates</th>
-                                <th style="text-align: center;">Result</th>
-                                <th style="text-align: center;">Voting</th>
+
                                 </thead>
                                 <tbody>
                                 <?php
-                                /*UPDATE WHERE CLAUSE*/
-                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE candidates.candidate_id =! '".$voter['id']."' GROUP BY positions.priority DESC";
+                                $query = "SELECT * FROM positions WHERE status = 'Pending'";
                                 $result = mysqli_query($conn,$query);
                                 while($row = mysqli_fetch_array($result)){
                                     $id = $row['id'];
                                     $description = $row['description'];
-                                if ($row['status'] == 'Ongoing'){
-                                    echo "
+                                        echo "
                         <tr>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
+                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['status']."</td>
                           <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
-                          </td>
-                          <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
-                          </td>
-                          <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block uservoting' data-id='".$id."'><i class='fa fa-search'></i> View</a>
-                          </td>
-                        </tr>
-                      ";}
-                                elseif ($row['status'] == 'Finish'){
-                                    echo "
-                        <tr>
-                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
-                          <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
-                          </td>
-                          <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
-                          </td>
-                          <td>
-                          <a style='border-radius: 15px;' class='btn btn-warning btn-sm btn-flat btn-block disabled uservoting' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block canelect' data-id='".$id."'><i class='fa fa-search'></i> Register</a>
                           </td>
                         </tr>
                       ";
-                                }
                                 }
                                 ?>
                                 </tbody>
                             </table>
                             <script type='text/javascript'>
                                 $(document).ready(function(){
+
+                                    $('.canelect').click(function(){
+
+                                        var userid = $(this).data('id');
+
+                                        // AJAX request
+                                        $.ajax({
+                                            url: 'candidates_election.php',
+                                            type: 'post',
+                                            data: {userid: userid},
+                                            success: function(response){
+                                                // Add response in Modal body
+                                                $('.modal-body').html(response);
+
+                                                // Display Modal
+                                                $('#empModal').modal('show');
+                                            }
+                                        });
+                                    });
 
                                     $('.userinfo').click(function(){
 
@@ -250,6 +252,8 @@
         <!-- right col -->
     </div>
     <?php include 'includes/footer.php'; ?>
+    <?php include 'includes/candidates_modal.php'; ?>
+
 </div>
 <!-- ./wrapper -->
 

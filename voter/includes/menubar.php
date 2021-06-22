@@ -14,9 +14,11 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header"></li>
-            <li class=""><a href="home.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-            <li class=""><a href="votingtest.php"><i class="fa fa-dashboard"></i> <span>Voting</span></a></li>
-            <li class=""><a href="testmodal.php"><i class="fa fa-dashboard"></i> <span>TEST</span></a></li>
+            <!--PREVIOUS HOME HAVE ELECTION AND BARCHART-->
+<!--            <li class=""><a href="home.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>-->
+            <!--PREVIOUS HOME HAVE ELECTION AND BARCHART-->
+            <li class=""><a href="votingtest.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            <li class=""><a href="testmodal.php"><i class="fa fa-bug"></i> <span>TESTING</span></a></li>
 
 
             <!--<li class=""><a href="camera.php"><span class="fa fa-camera"></span> <span>Camera</span></a></li>

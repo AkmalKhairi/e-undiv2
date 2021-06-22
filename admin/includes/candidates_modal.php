@@ -46,7 +46,7 @@
                       <label for="candidate_id" class="col-sm-3 control-label">ID</label>
 
                       <div class="col-sm-9">
-                          <input type="text" class="form-control" id="candidate_id" name="candidate_id" maxlength="4" required>
+                          <input type="text" class="form-control" placeholder="Last 4-Digits of NRIC" id="candidate_id" name="candidate_id" maxlength="4" onkeypress="return onlyNumberKey(event)" required>
                       </div>
                   </div>
                 <div class="form-group">
@@ -232,6 +232,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    function onlyNumberKey(evt) {
+
+        // Only ASCII charactar in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+
+    function viewPassword() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+</script>
 
 
 

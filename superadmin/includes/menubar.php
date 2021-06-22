@@ -22,9 +22,11 @@
         <li class=""><a href="voters.php"><span class="glyphicon glyphicon-user"></span> <span>Voter</span></a></li>
         <ul>
             <li class=""><a href="voters_not.php"><span class="glyphicon glyphicon-time"></span> <span>Voter Pending List</span></a></li>
-        <!--</ul>
-      <li class=""><a href="election.php"><span class="fa fa-check"></span> <span> Election</span></a></li>
-    </ul>-->
+        </ul>
+        <li class=""><a href="testing.php"><span class="fa fa-bug"></span> <span>Testing</span></a></li>
+
+        <!--      <li class=""><a href="election.php"><span class="fa fa-check"></span> <span> Election</span></a></li>
+        -->    </ul>
   </section>
   <!-- /.sidebar -->
 </aside>

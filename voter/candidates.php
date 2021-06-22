@@ -22,11 +22,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Dashboard
+                Joined Election
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li class="active">Joined Election</li>
             </ol>
         </section>
 
@@ -60,16 +60,16 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <div class="pull-right">
-                                <a href="#addnew" data-toggle="modal" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+                                <a href="candidatesregister.php" class="btn btn-success btn-sm btn-flat"><i class="fa fa-user-circle"></i> Join Election </a>
                             </div>
                         </div>
                         <div class="box-body">
                             <table id="example1" class="table table-bordered">
                                 <thead>
                                 <th style="text-align: center;">Voting Title</th>
+                                <th style="text-align: center;">Status</th>
                                 <th style="text-align: center;">Candidates</th>
                                 <th style="text-align: center;">Result</th>
-                                <th style="text-align: center;">Voting</th>
                                 </thead>
                                 <tbody>
                                 <?php
@@ -83,14 +83,12 @@
                                         echo "
                         <tr>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
+                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['status']."</td>
                           <td>
                           <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                           <td>
                           <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
-                          </td>
-                          <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block uservoting' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                         </tr>
                       ";}
@@ -98,14 +96,12 @@
                                         echo "
                         <tr>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
+                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['status']."</td>
                           <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          <a style='border-radius: 15px;' class='btn btn-warning btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                           <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
-                          </td>
-                          <td>
-                          <a style='border-radius: 15px;' class='btn btn-warning btn-sm btn-flat btn-block disabled uservoting' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          <a style='border-radius: 15px;' class='btn btn-warning btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                         </tr>
                       ";

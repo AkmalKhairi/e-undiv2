@@ -23,9 +23,6 @@ while( $row = mysqli_fetch_array($result) ){
     ?>
     <div class="text-center">
         <h3>You have already voted for this election.</h3>
-
-
-
     </div>
 <?php
 }
