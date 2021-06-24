@@ -62,10 +62,13 @@ else{
                 $input = ($row['max_vote'] > 1) ? '<input type="checkbox" class="flat-red '.$slug.'" name="'.$slug."[]".'" value="'.$crow['id'].'" '.$checked.'>' : '<input type="radio" class="flat-red '.$slug.'" name="'.slugify($row['description']).'" value="'.$crow['id'].'" '.$checked.'>';
                 $image = (!empty($crow['photo'])) ? '../images/'.$crow['photo'] : 'images/profile.jpg';
                 $candidate .= '
-												<li>
-													'.$input.'<button type="button" class="btn btn-primary btn-sm btn-flat clist platform" data-platform="'.$crow['platform'].'" data-fullname="'.$crow['firstname'].' '.$crow['lastname'].'"><i class="fa fa-search"></i> Manifesto</button><img src="'.$image.'" height="100px" width="100px" class="clist"><span class="cname clist">'.$crow['firstname'].' '.$crow['lastname'].'</span>
-												</li>
-											';
+                <li xmlns="http://www.w3.org/1999/html">
+                    ' .$input.'
+                    <button type="button" class="btn btn-primary btn-sm btn-flat clist platform" data-platform="'.$crow['platform'].'" data-fullname="'.$crow['firstname'].' '.$crow['lastname'].'"><i class="fa fa-search"></i> Manifesto</button>
+                    <img src="'.$image.'" height="70px" width="70px" class="clist">
+                    <span style="padding-left: 10px; font-size: 20px;" class="cname clist">'.$crow['firstname'].' '.$crow['lastname'].'</span>
+                </li>
+            ';
             }
 
             $instruct = ($row['max_vote'] > 1) ? 'You may select up to '.$row['max_vote'].' candidates' : 'Select only one candidate';
@@ -102,24 +105,30 @@ else{
         </div>
     </form>
     <!-- End Voting Ballot -->
-    <?php
-}
-
-?>
-
-<script>
-        $(function(){
+    <script>
+        $(function() {
             $('.content').iCheck({
                 checkboxClass: 'icheckbox_flat-green',
                 radioClass: 'iradio_flat-green'
             });
 
-            $(document).on('click', '.platform', function(e){
+            $(document).on('click', '.platform', function (e) {
                 e.preventDefault();
                 $('#platform').modal('show');
+                $('.uservoting').modal('hide');
                 var platform = $(this).data('platform');
                 var fullname = $(this).data('fullname');
                 $('.candidate').html(fullname);
                 $('#plat_view').html(platform);
             });
- </script>
+        });
+    </script>
+
+
+    <?php
+}
+
+?>
+
+
+

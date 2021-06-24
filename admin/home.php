@@ -67,7 +67,7 @@
                         </thead>
                         <tbody>
                         <?php
-                        $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE positions.status = 'Ongoing' GROUP BY positions.priority DESC";
+                        $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE positions.status = 'Ongoing' AND positions.created_by = '".$user['admin_id']."' GROUP BY positions.priority DESC";
                         $result = mysqli_query($conn,$query);
                         while($row = mysqli_fetch_array($result)){
                             $id = $row['id'];

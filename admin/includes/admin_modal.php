@@ -38,6 +38,13 @@
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-3 control-label">Phone Number</label>
+
+                        <div class="col-sm-9">
+                            <input placeholder="0123456789" minlength="10" maxlength="12" type="text" onkeypress="return onlyNumberKey(event)" class="form-control" id="phone" name="phone" required>
+                        </div>
+                    </div>
                     <!--<div class="form-group">
                         <label for="date" class="col-sm-3 control-label">Date</label>
 

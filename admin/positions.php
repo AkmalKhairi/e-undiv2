@@ -62,7 +62,7 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM positions ORDER BY priority ASC";
+                    $sql = "SELECT * FROM positions WHERE created_by = '".$user['admin_id']."' ORDER BY priority ASC";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       echo "

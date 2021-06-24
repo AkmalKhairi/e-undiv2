@@ -60,13 +60,13 @@
                     <div class="box">
                         <div class="box-header with-border">
                             <div class="pull-right">
-                                <a href="candidatesregister.php" class="btn btn-success btn-sm btn-flat"><i class="fa fa-user-circle"></i> Join Election </a>
+                                <a href="candidatesregister.php" class="btn btn-success btn-sm btn-flat"><i class="fa fa-user-circle"></i> Nominate Yourself </a>
                             </div>
                         </div>
                         <div class="box-body">
                             <table id="example1" class="table table-bordered">
                                 <thead>
-                                <th style="text-align: center;">Voting Title</th>
+                                <th style="text-align: center;">Election Title</th>
                                 <th style="text-align: center;">Status</th>
                                 <th style="text-align: center;">Candidates</th>
                                 <th style="text-align: center;">Result</th>

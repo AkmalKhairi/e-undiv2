@@ -23,6 +23,17 @@
                       <input min="1" type="number" class="form-control" id="max_vote" name="max_vote" required>
                     </div>
                 </div>
+
+
+                  <!--PLEASE FIX THIS-->
+                  <div class="form-group">
+                      <label for="max_vote" class="col-sm-3 control-label">Start Election</label>
+
+                      <div class="col-sm-9">
+                          <input name="somedate" type="date"  required>
+                      </div>
+                  </div>
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
@@ -146,6 +157,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    function onlyNumberKey(evt) {
+
+        // Only ASCII character in that range allowed
+        var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+        if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            return false;
+        return true;
+    }
+
+    function onlyAlphabetKey(alp){
+        return (event.charCode > 64 &&
+            event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)
+    }
+
+    function datemin(dat){
+        var today = new Date().toISOString().split('T')[0];
+        document.getElementsByName("somedate")[0].setAttribute('min', today)
+    }
+</script>
+<?php include 'includes/scripts.php' ?>
+
 
 
 

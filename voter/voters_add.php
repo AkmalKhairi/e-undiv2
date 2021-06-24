@@ -7,6 +7,7 @@ if(isset($_POST['add'])){
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $voter = $_POST['voters_id'];
     $date = $_POST['date'];
+    $phone = $_POST['phone'];
     $filename = $_FILES['photo']['name'];
     if(!empty($filename)){
         move_uploaded_file($_FILES['photo']['tmp_name'], '../images/'.$filename);
@@ -22,7 +23,7 @@ if(isset($_POST['add'])){
     {
         $date = date('Y-m-d');
         $status = "Not Verified";
-        $sql = "INSERT INTO voters (voters_id, password, firstname, lastname, created_on, photo, status) VALUES ('$voter', '$password', '$firstname', '$lastname', '$date' , '$filename', '$status')";
+        $sql = "INSERT INTO voters (voters_id, password, firstname, lastname, created_on, photo, status, phone) VALUES ('$voter', '$password', '$firstname', '$lastname', '$date' , '$filename', '$status','$phone')";
         if($conn->query($sql)){
             echo '<script language="javascript">';
             echo 'alert("Voters sucessfully insert")';

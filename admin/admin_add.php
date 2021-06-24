@@ -7,6 +7,7 @@ if(isset($_POST['add'])){
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $admin = $_POST['admin_id'];
     $date = $_POST['date'];
+    $phone = $_POST['phone'];
     $filename = $_FILES['photo']['name'];
     if(!empty($filename)){
         move_uploaded_file($_FILES['photo']['tmp_name'], '../images/'.$filename);
@@ -23,7 +24,7 @@ if(isset($_POST['add'])){
     {
         $date = date('Y-m-d');
         $status = "Not Verified";
-        $sql = "INSERT INTO `admin` (`admin_id`, `password`, `firstname`, `lastname`, `photo`, `created_on`, `status`) VALUES ('$admin', '$password', '$firstname', '$lastname', '$filename', '$date', '$status')";
+        $sql = "INSERT INTO `admin` (`admin_id`, `password`, `firstname`, `lastname`, `photo`,`phone`, `created_on`, `status`) VALUES ('$admin', '$password', '$firstname', '$lastname', '$filename', '$phone', '$date', '$status')";
 
         if($conn->query($sql)){
             echo '<script language="javascript">';

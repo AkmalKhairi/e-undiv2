@@ -84,7 +84,7 @@
                           ".$row['status']."
                           </td>
                           <td>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-thumbs-down'></i> Reject</button>
+                            <button class='btn btn-danger btn-sm reject btn-flat' data-id='".$row['id']."'><i class='fa fa-thumbs-down'></i> Reject</button>
                             <button class='btn btn-success btn-sm approve btn-flat' data-id='".$row['id']."'><i class='fa fa-check'></i> Confirm</button>
 
                           </td>
@@ -127,6 +127,13 @@
         $(document).on('click', '.approve', function(e){
             e.preventDefault();
             $('#approve').modal('show');
+            var id = $(this).data('id');
+            getRow(id);
+        });
+
+        $(document).on('click', '.reject', function(e){
+            e.preventDefault();
+            $('#reject').modal('show');
             var id = $(this).data('id');
             getRow(id);
         });

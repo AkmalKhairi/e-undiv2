@@ -1,25 +1,23 @@
 <?php
 include 'includes/session.php';
 
-if(isset($_POST['approval'])){
+if(isset($_POST['reject'])){
     $id = $_POST['id'];
+
     $sql = "SELECT * FROM candidates LEFT JOIN voters ON candidates.candidate_id = voters.voters_id WHERE candidates.id = $id";
     $query = $conn->query($sql);
     $row = $query->fetch_assoc();
 
-    /*    $date = date('Y-m-d');*/
-    $status = "Approve";
-    $sql = "UPDATE candidates SET status = '$status' WHERE id = '$id'";
-    /*    $sql = "UPDATE admin SET status = '$status' AND created_on = '$date' WHERE id = '$id'";*/
-
+    $sql = "DELETE FROM candidates WHERE id = '$id'";
     if($conn->query($sql)){
-        $_SESSION['success'] = 'Candidate successfully approved!';
+        $_SESSION['success'] = 'The pending nomination has been rejected!';
     }
     else{
         $_SESSION['error'] = $conn->error;
     }
+
     $phone = $row['phone'];
-    $msg = 'Your nomination for E-Undi as CANDIDATE has been APPROVED.';
+    $msg = 'Sorry your nomination for E-Undi as CANDIDATE has been rejected. Please try register again.';
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -42,9 +40,10 @@ if(isset($_POST['approval'])){
     } else {
         echo $response;
     }
+
 }
 else{
-    $_SESSION['error'] = 'Error approving Candidate';
+    $_SESSION['error'] = 'Select item to delete first';
 }
 
 header('location: candidates.php');

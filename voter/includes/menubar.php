@@ -25,7 +25,7 @@
             <li class=""><a href="#"><i class="fa fa-users"></i> <span>Vote</span></a></li>-->
             <li class="header"></li>
 <!--            <li class=""><a href="votingtest.php"><i class="fa fa-tasks"></i> <span>Test</span></a></li>
--->            <li class=""><a href="candidates.php"><i class="fa fa-black-tie"></i> <span>Candidate</span></a></li>
+-->            <li class=""><a href="candidates.php"><i class="fa fa-black-tie"></i> <span>Nomination</span></a></li>
             <!--       <li class="header"></li>
                   <li class=""><a href="ballot.php"><i class="fa fa-file-text"></i> <span>Ballot Position</span></a></li>
                   <li class=""><a href="#config" data-toggle="modal"><i class="fa fa-cog"></i> <span>Election Title</span></a></li> -->
