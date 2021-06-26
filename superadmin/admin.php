@@ -29,22 +29,21 @@
                 <?php
                 if(isset($_SESSION['error'])){
                     echo "
-            <div class='alert alert-danger alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-warning'></i> Error!</h4>
-              ".$_SESSION['error']."
-            </div>
-          ";
+  				<div class='alert alert-danger alert-dismissible'>
+  			 <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+
+			  		<p>".$_SESSION['error']."</p> 
+			  	</div>
+  			";
                     unset($_SESSION['error']);
                 }
-                if(isset($_SESSION['success'])){
+                elseif (isset($_SESSION['success'])){
                     echo "
-            <div class='alert alert-success alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
-              <h4><i class='icon fa fa-check'></i> Success!</h4>
-              ".$_SESSION['success']."
-            </div>
-          ";
+  				<div class='alert alert-success alert-dismissible'>
+  				<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+			  		<p>".$_SESSION['success']."</p> 
+			  	</div>
+  			";
                     unset($_SESSION['success']);
                 }
                 ?>
@@ -52,8 +51,11 @@
                     <div class="col-xs-12">
                         <div class="box">
                             <div class="box-header with-border">
-                                <a href="#addnew" data-toggle="modal" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
-                            </div>
+                                <div class="pull-right">
+                                <a href="#addnew" data-toggle="modal" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+                                <a href="admin_not.php" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-clock-o"></i> Pending Admin</a>
+                                </div>
+                                </div>
                             <div class="box-body">
                                 <table id="example1" class="table table-bordered">
                                     <thead>
@@ -83,7 +85,7 @@
                             ".$row['status']."
                           </td>
                           <td>
-                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
+                            <button class='btn btn-primary btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
                             <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
                           </td>
                         </tr>

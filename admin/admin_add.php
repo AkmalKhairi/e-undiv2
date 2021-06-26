@@ -27,10 +27,7 @@ if(isset($_POST['add'])){
         $sql = "INSERT INTO `admin` (`admin_id`, `password`, `firstname`, `lastname`, `photo`,`phone`, `created_on`, `status`) VALUES ('$admin', '$password', '$firstname', '$lastname', '$filename', '$phone', '$date', '$status')";
 
         if($conn->query($sql)){
-            echo '<script language="javascript">';
-            echo 'alert("Admin sucessfully insert")';
-            echo '</script>';
-            echo ("<script>location.href='index.php'</script>");
+            $_SESSION['success'] = 'Registration success';
         }
         else{
             $_SESSION['error'] = $conn->error;

@@ -1,3 +1,4 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Add -->
 <div class="modal fade" id="addnew">
     <div class="modal-dialog">
@@ -30,9 +31,11 @@
                       <label for="max_vote" class="col-sm-3 control-label">Start Election</label>
 
                       <div class="col-sm-9">
-                          <input name="somedate" type="date"  required>
+                          <input id="dateInput" type="datetime-local" step="1" required>
                       </div>
                   </div>
+                  <!--PLEASE FIX THIS-->
+
 
             </div>
             <div class="modal-footer">
@@ -173,13 +176,29 @@
             event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)
     }
 
-    function datemin(dat){
-        var today = new Date().toISOString().split('T')[0];
-        document.getElementsByName("somedate")[0].setAttribute('min', today)
-    }
-</script>
-<?php include 'includes/scripts.php' ?>
+    $(document).ready(function (){
+        var dtToday = new Date();
+        var month = dtToday.getMonth() + 1;     // getMonth() is zero-based
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
 
+        var maxDate = year + '-' + month + '-' + day;
+        $('#dateID').attr('min', maxDate);
+    })
+
+    $(document).ready(function(){
+        elem = document.getElementById("dateInput")
+        var iso = new Date().toISOString().replace(/.\d+Z$/g, "Z");
+        var minDate = iso.substring(0,iso.length-1);
+        elem.value = minDate
+        elem.min = minDate
+    });
+
+</script>
 
 
 

@@ -53,6 +53,9 @@ if(isset($_SESSION['voter'])){
   			";
         unset($_SESSION['error']);
     }
+    else{
+
+    }
     ?>
 </div>
 

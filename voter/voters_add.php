@@ -25,10 +25,7 @@ if(isset($_POST['add'])){
         $status = "Not Verified";
         $sql = "INSERT INTO voters (voters_id, password, firstname, lastname, created_on, photo, status, phone) VALUES ('$voter', '$password', '$firstname', '$lastname', '$date' , '$filename', '$status','$phone')";
         if($conn->query($sql)){
-            echo '<script language="javascript">';
-            echo 'alert("Voters sucessfully insert")';
-            echo '</script>';
-            echo ("<script>location.href='index.php'</script>");
+            $_SESSION['success'] = 'Registration success';
         }
         else{
             $_SESSION['error'] = $conn->error;

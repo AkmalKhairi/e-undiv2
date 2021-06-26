@@ -54,6 +54,14 @@ if(isset($_SESSION['voter'])){
   			";
         unset($_SESSION['error']);
     }
+    elseif (isset($_SESSION['success'])){
+        echo "
+  				<div class='callout callout-success text-center mt20'>
+			  		<p>".$_SESSION['success']."</p> 
+			  	</div>
+  			";
+        unset($_SESSION['success']);
+    }
     ?>
 
 </div>

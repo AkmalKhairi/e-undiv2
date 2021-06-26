@@ -7,7 +7,7 @@
 		$lastname = $_POST['lastname'];
 		$password = $_POST['password'];
 
-		$sql = "SELECT * FROM admin WHERE id = $id";
+		$sql = "SELECT * FROM voters WHERE id = $id";
 		$query = $conn->query($sql);
 		$row = $query->fetch_assoc();
 
@@ -18,9 +18,9 @@
 			$password = password_hash($password, PASSWORD_DEFAULT);
 		}
 
-		$sql = "UPDATE admin SET firstname = '$firstname', lastname = '$lastname', password = '$password' WHERE id = '$id'";
+		$sql = "UPDATE voters SET firstname = '$firstname', lastname = '$lastname', password = '$password' WHERE id = '$id'";
 		if($conn->query($sql)){
-			$_SESSION['success'] = 'Admin updated successfully';
+			$_SESSION['success'] = 'Voters updated successfully';
 		}
 		else{
 			$_SESSION['error'] = $conn->error;
@@ -30,6 +30,6 @@
 		$_SESSION['error'] = 'Fill up edit form first';
 	}
 
-	header('location: voters.php');
+	header('location: votingtest.php');
 
 ?>

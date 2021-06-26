@@ -44,9 +44,12 @@
 				}
 
 				unset($_SESSION['post']);
-				$_SESSION['success'] = 'Ballot Submitted';
+				$_SESSION['success'] = 'Ballot Submitted Successfully!';
 
 			}
+			else{
+                $_SESSION['error'] = 'Error on submitting the ballot';
+            }
 
 		}
 

@@ -4,16 +4,18 @@
 	if(isset($_POST['add'])){
 		$description = $_POST['description'];
 		$max_vote = $_POST['max_vote'];
+        $date = $_POST['date'];
 
 
-		$sql = "SELECT * FROM positions ORDER BY priority DESC LIMIT 1";
+
+        $sql = "SELECT * FROM positions ORDER BY priority DESC LIMIT 1";
 		$query = $conn->query($sql);
 		$row = $query->fetch_assoc();
 
 		$priority = $row['priority'] + 1;
         $status = "Pending";
         $created = $user['admin_id'];
-        $sql = "INSERT INTO positions (created_by, description, max_vote, priority,status) VALUES ('$created','$description', '$max_vote', '$priority', '$status')";
+        $sql = "INSERT INTO positions (created_by, description, max_vote, priority,status,nominationdate) VALUES ('$created','$description', '$max_vote', '$priority', '$status','$date')";
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Position added successfully';
 		}
