@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><b>Add New Voter</b></h4>
+                <h4 class="modal-title"><b>Voter Registration</b></h4>
             </div>
             <div class="modal-body">
                 <form class="form-horizontal" method="POST" action="voters_add.php" enctype="multipart/form-data">
@@ -13,21 +13,21 @@
                         <label for="firstname" class="col-sm-3 control-label">Firstname</label>
 
                         <div class="col-sm-9">
-                            <input style="text-transform: uppercase;" type="text" class="form-control" id="firstname" name="firstname" required>
+                            <input style="text-transform: uppercase;" type="text" class="form-control" id="firstname" name="firstname" onkeypress="return onlyAlphabetKey(event)" required>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="lastname" class="col-sm-3 control-label">Lastname</label>
 
                         <div class="col-sm-9">
-                            <input style="text-transform: uppercase;" type="text" class="form-control" id="lastname" name="lastname" required>
+                            <input style="text-transform: uppercase;" type="text" class="form-control" id="lastname" name="lastname" onkeypress="return onlyAlphabetKey(event)" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="lastname" class="col-sm-3 control-label">ID</label>
+                        <label for="nric" class="col-sm-3 control-label">NRIC</label>
 
                         <div class="col-sm-9">
-                            <input placeholder="987654321011" maxlength="12" type="text" onkeypress="return onlyNumberKey(event)" class="form-control" id="voters_id" name="voters_id" required>
+                            <input placeholder="987654321011" minlength="12" maxlength="12" type="text" onkeypress="return onlyNumberKey(event)" class="form-control" id="voters_id" name="voters_id" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -35,6 +35,13 @@
 
                         <div class="col-sm-9">
                             <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-3 control-label">Phone Number</label>
+
+                        <div class="col-sm-9">
+                            <input placeholder="0123456789" minlength="10" maxlength="12" type="text" onkeypress="return onlyNumberKey(event)" class="form-control" id="phone" name="phone" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -47,7 +54,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-                <button type="submit" class="btn btn-primary btn-flat" name="add"><i class="fa fa-save"></i> Save</button>
+                <button type="submit" class="btn btn-success btn-flat" name="add"><i class="fa fa-check"></i> Register</button>
                 </form>
             </div>
         </div>

@@ -22,11 +22,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Dashboard
+                Available Election
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li class="active"> Available Election</li>
             </ol>
         </section>
 
@@ -84,6 +84,7 @@
                             <table id="example1" class="table table-bordered">
                                 <thead>
                                 <th style="text-align: center;">Voting Title</th>
+                                <th style="text-align: center;">Voting End</th>
                                 <th style="text-align: center;">Candidates</th>
                                 <th style="text-align: center;">Result</th>
                                 <th style="text-align: center;">Voting</th>
@@ -100,6 +101,7 @@
                                         echo "
                         <tr>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
+                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['enddate']."</td>
                           <td>
                           <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>

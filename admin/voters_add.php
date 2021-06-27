@@ -6,37 +6,31 @@ if(isset($_POST['add'])){
     $lastname = $_POST['lastname'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $voter = $_POST['voters_id'];
+    $date = $_POST['date'];
+    $phone = $_POST['phone'];
     $filename = $_FILES['photo']['name'];
     if(!empty($filename)){
         move_uploaded_file($_FILES['photo']['tmp_name'], '../images/'.$filename);
     }
-    $sql2 = mysqli_query($conn,"SELECT voters_id from voters WHERE voters_id = '$voter'");
+    $sql2 = mysqli_query($conn,"SELECT voters_id from voters WHERE voters_id = '$voter' AND status='Not Verified'");
     if (mysqli_num_rows($sql2)==1) {
-        echo '<script language="javascript">';
-        echo 'alert("User already exist")';
-        echo '</script>';
-        echo ("<script>location.href='voters.php'</script>");
+        $_SESSION['error'] = 'User already exist';
     }
     else
     {
+        $date = date('Y-m-d');
         $status = "Not Verified";
-        $sql = "INSERT INTO voters (voters_id, password, firstname, lastname, photo, status) VALUES ('$voter', '$password', '$firstname', '$lastname', '$filename', '$status')";
+        $sql = "INSERT INTO voters (voters_id, password, firstname, lastname, created_on, photo, status, phone) VALUES ('$voter', '$password', '$firstname', '$lastname', '$date' , '$filename', '$status','$phone')";
         if($conn->query($sql)){
-            echo '<script language="javascript">';
-            echo 'alert("Voters sucessfully insert!")';
-            echo '</script>';
-            echo ("<script>location.href='voters.php'</script>");
+            $_SESSION['success'] = 'Registration success';
         }
         else{
             $_SESSION['error'] = $conn->error;
         }
     }
-
-
 }
 else{
-    $_SESSION['error'] = 'Fill up add form first';
+    $_SESSION['error'] = 'Fill up the form first';
 }
-header('location: voters.php');
+header('location: index.php');
 ?>
-

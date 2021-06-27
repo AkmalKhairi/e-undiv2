@@ -5,6 +5,7 @@
 		$description = $_POST['description'];
 		$max_vote = $_POST['max_vote'];
         $date = $_POST['date'];
+        $newdate = date("Y-m-d H:i:s",strtotime($date));
 
 
 
@@ -15,7 +16,7 @@
 		$priority = $row['priority'] + 1;
         $status = "Pending";
         $created = $user['admin_id'];
-        $sql = "INSERT INTO positions (created_by, description, max_vote, priority,status,nominationdate) VALUES ('$created','$description', '$max_vote', '$priority', '$status','$date')";
+        $sql = "INSERT INTO positions (created_by, description, max_vote, priority,status,nominationdate) VALUES ('$created','$description', '$max_vote', '$priority', '$status','$newdate')";
 		if($conn->query($sql)){
 			$_SESSION['success'] = 'Position added successfully';
 		}

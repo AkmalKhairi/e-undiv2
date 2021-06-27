@@ -13,12 +13,9 @@ if(isset($_POST['add'])){
         move_uploaded_file($_FILES['photo']['tmp_name'], '../images/'.$filename);
     }
 
-    $sql2 = mysqli_query($conn,"SELECT admin_id from admin WHERE admin_id = '$admin'");
+    $sql2 = mysqli_query($conn,"SELECT admin_id from admin WHERE admin_id = '$admin' AND status='Not Verified'");
     if (mysqli_num_rows($sql2)==1) {
-        echo '<script language="javascript">';
-        echo 'alert("Admin already exist")';
-        echo '</script>';
-        echo ("<script>location.href='index.php'</script>");
+        $_SESSION['error'] = 'User already exist';
     }
     else
     {

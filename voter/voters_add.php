@@ -12,12 +12,9 @@ if(isset($_POST['add'])){
     if(!empty($filename)){
         move_uploaded_file($_FILES['photo']['tmp_name'], '../images/'.$filename);
     }
-    $sql2 = mysqli_query($conn,"SELECT voters_id from voters WHERE voters_id = '$voter'");
+    $sql2 = mysqli_query($conn,"SELECT voters_id from voters WHERE voters_id = '$voter' AND status='Not Verified'");
     if (mysqli_num_rows($sql2)==1) {
-        echo '<script language="javascript">';
-        echo 'alert("User already exist")';
-        echo '</script>';
-        echo ("<script>location.href='index.php'</script>");
+        $_SESSION['error'] = 'User already exist';
     }
     else
     {

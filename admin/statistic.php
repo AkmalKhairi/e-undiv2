@@ -114,7 +114,8 @@
                 <!-- ./col -->
             </div>
 
-            <div class="row">
+            <!--PRINT-->
+            <!--<div class="row">
                 <div class="col-xs-12">
                     <h3>Votes Tally
                         <span class="pull-right">
@@ -122,61 +123,133 @@
             </span>
                     </h3>
                 </div>
-            </div>
+            </div>-->
 
             <!--GRAPH BAR-->
-            <div align="center">
-                <?php
-                $sql ="SELECT description, Count(position_id) as total FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id GROUP BY position_id";
-                $result = mysqli_query($conn,$sql);
-                $chart_data="";
-                while ($row = mysqli_fetch_array($result)) {
 
-                    $description[]  = $row['description']  ;
-                    $total[] = $row['total'];
-                }
-                ?>
-                <div style="width:30%;hieght:20%;text-align:center">
-                    <h2 class="page-header" >Election Reports </h2>
-                    <div>Election </div>
-                    <canvas  id="chartjs_bar"></canvas>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col" align="center">
+                                <?php
+                                $sql ="SELECT description, Count(position_id) as total FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id GROUP BY position_id";
+                                $result = mysqli_query($conn,$sql);
+                                $chart_data="";
+                                while ($row = mysqli_fetch_array($result)) {
+
+                                    $description[]  = $row['description']  ;
+                                    $total[] = $row['total'];
+                                }
+                                ?>
+                                <div style="width:60%;height:40%;text-align:center">
+                                    <h2 class="page-header" >Number of Candidates in Every Election </h2>
+                                    <div>Election </div>
+                                    <canvas  id="chartjs_bar"></canvas>
+                                </div>
+
+                                <script type="text/javascript">
+                                    var ctx = document.getElementById("chartjs_bar").getContext('2d');
+                                    var myChart = new Chart(ctx, {
+                                        type: 'doughnut',
+                                        data: {
+                                            labels:<?php echo json_encode($description); ?>,
+                                            datasets: [{
+                                                backgroundColor: [
+                                                    "#5969ff",
+                                                    "#ff407b",
+                                                    "#25d5f2",
+                                                    "#ffc750",
+                                                    "#2ec551",
+                                                    "#7040fa",
+                                                    "#ff004e"
+                                                ],
+                                                data:<?php echo json_encode($total); ?>,
+                                            }]
+                                        },
+                                        options: {
+                                            legend: {
+                                                display: true,
+                                                position: 'bottom',
+
+                                                labels: {
+                                                    fontColor: '#71748d',
+                                                    fontFamily: 'Circular Std Book',
+                                                    fontSize: 14,
+                                                }
+                                            },
+
+
+                                        }
+                                    });
+
+                                </script>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!--GRAPH BAR-->
 
-            <script type="text/javascript">
-                var ctx = document.getElementById("chartjs_bar").getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels:<?php echo json_encode($description); ?>,
-                        datasets: [{
-                            backgroundColor: [
-                                "#5969ff",
-                                "#ff407b",
-                                "#25d5f2",
-                                "#ffc750",
-                                "#2ec551",
-                                "#7040fa",
-                                "#ff004e"
-                            ],
-                            data:<?php echo json_encode($total); ?>,
-                        }]
-                    },
-                    options: {
-                        legend: {
-                            display: true,
-                            position: 'bottom',
+                <!--GRAPH BAR-->
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col" align="center">
+                                <?php
+                                $sql2 ="SELECT status, Count(id) as total FROM positions GROUP BY status";
+                                $result2 = mysqli_query($conn,$sql2);
+                                $chart_data2="";
+                                while ($row = mysqli_fetch_array($result2)) {
 
-                            labels: {
-                                fontColor: '#71748d',
-                                fontFamily: 'Circular Std Book',
-                                fontSize: 14,
-                            }
-                        },
+                                    $status_admin[]  = $row['status']  ;
+                                    $total_admin[] = $row['total'];
+                                }
+                                ?>
+                                <div style="width:60%;height:40%;text-align:center">
+                                    <h2 class="page-header" >Election Status Report </h2>
+                                    <div>Status </div>
+                                    <canvas  id="chartjs_admin"></canvas>
+                                </div>
+
+                                <script type="text/javascript">
+                                    var ctx2 = document.getElementById("chartjs_admin").getContext('2d');
+                                    var myChart2 = new Chart(ctx2, {
+                                        type: 'doughnut',
+                                        data: {
+                                            labels:<?php echo json_encode($status_admin); ?>,
+                                            datasets: [{
+                                                backgroundColor: [
+                                                    "#2ec551",
+                                                    "#ffc750",
+                                                    "#ff004e",
+                                                    "#25d5f2",
+                                                    "#7040fa",
+                                                    "#5969ff",
+                                                    "#ff407b"
+                                                ],
+                                                data:<?php echo json_encode($total_admin); ?>,
+                                            }]
+                                        },
+                                        options: {
+                                            legend: {
+                                                display: true,
+                                                position: 'bottom',
+
+                                                labels: {
+                                                    fontColor: '#71748d',
+                                                    fontFamily: 'Circular Std Book',
+                                                    fontSize: 14,
+                                                }
+                                            },
 
 
-                    }
-                });
-            </script>
+                                        }
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--GRAPH BAR-->
 

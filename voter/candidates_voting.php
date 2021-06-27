@@ -64,7 +64,6 @@ else{
                 $candidate .= '
                 <li xmlns="http://www.w3.org/1999/html">
                     ' .$input.'
-                    <button type="button" class="btn btn-primary btn-sm btn-flat clist platform" data-platform="'.$crow['platform'].'" data-fullname="'.$crow['firstname'].' '.$crow['lastname'].'"><i class="fa fa-search"></i> Manifesto</button>
                     <img src="'.$image.'" height="70px" width="70px" class="clist">
                     <span style="padding-left: 10px; font-size: 20px;" class="cname clist">'.$crow['firstname'].' '.$crow['lastname'].'</span>
                 </li>
@@ -98,10 +97,17 @@ else{
         }
 
         ?>
+        <div>
+            <!--<button type="button" class="btn btn-success btn-flat" id="preview"><i class="fa fa-file-text"></i> Preview</button>-->
+            <div class="text-center">
+            <p style="color: red;"><b> Election Instructions </b></p>
+            </div>
+            <p><b> 1. Please read the manifesto first before proceed with the voting </b></p>
+            <p><b> 2. Please vote and choose the candidate(s) you agree to vote before click the submit button </b></p>
+            <p><b> 3. Any change of candidate will not be accepted by the committee </b></p>
+        </div>
         <div class="text-center">
-            <!--                                 <button type="button" class="btn btn-success btn-flat" id="preview"><i class="fa fa-file-text"></i> Preview</button>
-            -->                         	<button style="padding: 14px 28px; width: 100%; font-size: 20px;" type="submit" class="btn btn-success btn-flat" name="vote">
-                <i class="fa fa-check-square-o"></i> Submit</button>
+            <button style="padding: 14px 28px; width: 100%; font-size: 20px;" type="submit" class="btn btn-success btn-flat" name="vote"><i class="fa fa-check-square-o"></i> Submit</button>
         </div>
     </form>
     <!-- End Voting Ballot -->

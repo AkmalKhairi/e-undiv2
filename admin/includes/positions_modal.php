@@ -25,17 +25,13 @@
                     </div>
                 </div>
 
-
-                  <!--PLEASE FIX THIS-->
                   <div class="form-group">
                       <label for="max_vote" class="col-sm-3 control-label">Start Election</label>
 
                       <div class="col-sm-9">
-                          <input id="dateInput" type="datetime-local" step="1" required>
+                          <input id="dateInput" name="date" type="datetime-local" step="1" required>
                       </div>
                   </div>
-                  <!--PLEASE FIX THIS-->
-
 
             </div>
             <div class="modal-footer">
@@ -148,7 +144,15 @@
                 <form class="form-horizontal" method="POST" action="positions_penstat.php">
                     <input type="hidden" class="id" name="id">
                     <div class="text-center">
-                        <p>CONFIRM TO START <h2 class="bold description"></h2></p>
+                        <p>CONFIRM TO START <h2 class="bold description"></h2></p> <br>
+
+                        <div class="form-group">
+                            <label for="max_vote" class="col-sm-3 control-label">Election End at:</label>
+
+                            <div class="col-sm-9">
+                                <input id="findate" name="date" type="datetime-local" step="1" required>
+                            </div>
+                        </div>
 
                     </div>
             </div>
@@ -192,6 +196,14 @@
 
     $(document).ready(function(){
         elem = document.getElementById("dateInput")
+        var iso = new Date().toISOString().replace(/.\d+Z$/g, "Z");
+        var minDate = iso.substring(0,iso.length-1);
+        elem.value = minDate
+        elem.min = minDate
+    });
+
+    $(document).ready(function(){
+        elem = document.getElementById("findate")
         var iso = new Date().toISOString().replace(/.\d+Z$/g, "Z");
         var minDate = iso.substring(0,iso.length-1);
         elem.value = minDate

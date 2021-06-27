@@ -10,7 +10,7 @@ if(isset($_POST['status'])){
 
 /*    $date = date('YYYY-MM-DD HH:MM:SS');*/
     $status = "Finish";
-    $sql = "UPDATE positions SET status = '$status', enddate = CURRENT_TIMESTAMP WHERE id = '$id'";
+    $sql = "UPDATE positions SET status = '$status' WHERE id = '$id'";
     /*    $sql = "UPDATE admin SET status = '$status' AND created_on = '$date' WHERE id = '$id'";*/
 
     if($conn->query($sql)){
