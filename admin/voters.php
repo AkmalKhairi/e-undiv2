@@ -44,7 +44,7 @@
           <div class="box">
             <div class="box-header with-border">
                 <div class="pull-right">
-              <a href="#addnew" data-toggle="modal" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
+              <!--<a href="#addnew" data-toggle="modal" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>-->
                 </div>
             </div>
             <div class="box-body">

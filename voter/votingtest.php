@@ -92,8 +92,8 @@
                                 <tbody>
                                 <?php
                                 /*UPDATE WHERE CLAUSE*/
-                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE candidates.candidate_id =! '".$voter['id']."' GROUP BY positions.priority DESC";
-                                $result = mysqli_query($conn,$query);
+                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE candidates.candidate_id != '".$voter['voters_id']."' GROUP BY positions.priority DESC";
+                                $result = mysqli_query($conn,$query)or die( mysqli_error($conn));
                                 while($row = mysqli_fetch_array($result)){
                                     $id = $row['id'];
                                     $description = $row['description'];
@@ -117,6 +117,7 @@
                                         echo "
                         <tr>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
+                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['enddate']."</td>
                           <td>
                           <a style='border-radius: 15px;' class='btn btn-warning btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>

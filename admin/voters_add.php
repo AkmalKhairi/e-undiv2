@@ -32,5 +32,5 @@ if(isset($_POST['add'])){
 else{
     $_SESSION['error'] = 'Fill up the form first';
 }
-header('location: index.php');
+header('location: voters.php');
 ?>
