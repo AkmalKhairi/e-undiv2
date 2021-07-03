@@ -4,9 +4,23 @@ $userid = $_POST['userid'];
 
 $sql = "SELECT * FROM positions LEFT JOIN candidates ON positions.id=candidates.position_id WHERE positions.id=".$userid." ORDER BY priority ASC" ;
 $query = $conn->query($sql);
-while($row = $query->fetch_assoc()){
-    $id = $row['id'];
-    if ($row['candidate_id'] != $voter['voters_id']) {
+while($row = $query->fetch_assoc()) {
+    /*id change to position_id*/
+    $id = $row['position_id'];
+    $votid = $voter['voters_id'];
+}
+    /*Use Count to validate the existing*/
+
+    $sql3 = "SELECT COUNT(*) AS count FROM candidates WHERE position_id='$id' AND candidate_id = '$votid'";
+    $squery = $conn->query($sql3);
+
+
+    while($vrow = $squery->fetch_assoc()){
+        $countrow = $vrow['count'];
+    }
+
+    if ($countrow == 0) {
+
         $sql2 = "SELECT * FROM positions WHERE positions.id=" . $userid . " ORDER BY priority ASC";
         $vquery = $conn->query($sql2);
         while ($crow = $vquery->fetch_assoc()) {
@@ -69,7 +83,7 @@ while($row = $query->fetch_assoc()){
         	";
         }
     }
-    elseif ($row['candidate_id'] == $voter['voters_id']){
+    elseif ($countrow > 0){
         echo "
         <div class='text-center'>
         <img src='../images/check.gif' style='width:60px;height:60px;'>
@@ -78,6 +92,6 @@ while($row = $query->fetch_assoc()){
 
     </div>
     ";
-    }
+
 }
 ?>

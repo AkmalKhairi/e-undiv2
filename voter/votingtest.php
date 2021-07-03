@@ -91,8 +91,9 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                /*UPDATE WHERE CLAUSE*/
-                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE candidates.candidate_id != '".$voter['voters_id']."' GROUP BY positions.priority DESC";
+                                /*UPDATE WHERE CLAUSE TO SUBQUERY */
+
+                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id where position_id NOT IN (select position_id FROM candidates where candidate_id = '".$voter['voters_id']."') GROUP BY positions.id";
                                 $result = mysqli_query($conn,$query)or die( mysqli_error($conn));
                                 while($row = mysqli_fetch_array($result)){
                                     $id = $row['id'];
