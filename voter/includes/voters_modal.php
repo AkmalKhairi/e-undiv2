@@ -3,6 +3,16 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                    <script type="text/javascript">
+
+                        var onloadCallback = function() {
+                            grecaptcha.render('html_element', {
+                                'sitekey' : '6LeLeuEbAAAAAI6nJayhyVYG7t6sk3fMxGVlWWYZ'
+                            });
+                        };
+
+
+                    </script>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title"><b>Voter Registration</b></h4>
@@ -50,12 +60,17 @@
                         <div class="col-sm-9">
                             <input type="file" id="photo" name="photo" required>
                         </div>
+
+                        <div class="col-sm-9 g-recaptcha" id="html_element"></div>
                     </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
                 <button type="submit" class="btn btn-success btn-flat" name="add"><i class="fa fa-check"></i> Register</button>
                 </form>
+                <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                        async defer>
+                </script>
             </div>
         </div>
     </div>
@@ -204,6 +219,15 @@
         return (event.charCode > 64 &&
             event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)
     }
+
+    $("add").submit(function(event) {
+
+        var recaptcha = $("#g-recaptcha-response").val();
+        if (recaptcha === "") {
+            event.preventDefault();
+            alert("Please check the recaptcha");
+        }
+    });
 
 </script>
 

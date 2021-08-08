@@ -55,6 +55,7 @@
               <table id="example1" class="table table-bordered">
                 <thead>
                   <th class="hidden"></th>
+                  <th>Join Code</th>
                   <th>Description</th>
                   <th>Maximum Vote</th>
                   <th>Status</th>
@@ -68,6 +69,7 @@
                       echo "
                         <tr>
                           <td class='hidden'></td>
+                          <td>".$row['u_id']."</td>
                           <td>".$row['description']."</td>
                           <td>".$row['max_vote']."</td>
                           <td>".$row['status']."</td>

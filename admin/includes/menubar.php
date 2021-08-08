@@ -17,9 +17,7 @@
       <li class=""><a href="home.php"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
         <li class=""><a href="statistic.php"><i class="fa fa-line-chart"></i> <span>Statistic</span></a></li>
         <!--<li class=""><a href="testmodal.php"><i class="fa fa-line-chart"></i> <span>TEST</span></a></li>-->
-
-
-        <!--<li class=""><a href="votes.php"><span class="glyphicon glyphicon-check"></span> <span>Votes</span></a></li>-->
+      <li class=""><a href="votes.php"><span class="glyphicon glyphicon-check"></span> <span>Votes</span></a></li>
       <li class="header"></li>
       <li class=""><a href="voters.php"><i class="fa fa-users"></i> <span>Voters</span></a></li>
       <li class=""><a href="positions.php"><i class="fa fa-tasks"></i> <span>Positions</span></a></li>

@@ -28,6 +28,12 @@ if(isset($_SESSION['voter'])){
                 <input type="password" class="form-control" name="password" placeholder="Password" id="password" required>
                 <input type="checkbox" onclick="viewPassword()"> Show Password
                 <span class="glyphicon glyphicon-asterisk form-control-feedback"></span>
+
+                <div style="color: #8B98AB; font-size: 13px">
+                    This site is protected by reCAPTCHA and the Google
+                    <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+                    <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+                </div>
             </div>
             <div class="row">
                 <div class="col-md-12 column">

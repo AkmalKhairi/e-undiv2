@@ -81,9 +81,6 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header with-border">
-                            <div class="pull-right">
-                                <a href="votes_enrolling.php" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus"></i> Enroll Election </a>
-                            </div>
                         </div>
                         <div class="box-body">
                             <table id="example1" class="table table-bordered">
@@ -97,8 +94,11 @@
                                 <tbody>
                                 <?php
                                 /*UPDATE WHERE CLAUSE TO SUBQUERY */
-
-                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id where position_id IN (select voters_id FROM enroll where voters_id = '".$voter['id']."') GROUP BY positions.id";
+                                /*$query = "SELECT *, enroll.position_id AS enstat FROM enroll LEFT JOIN positions ON enroll.position_id=positions.id LEFT JOIN candidates ON positions.id=candidates.position_id where candidates.position_id NOT IN (select position_id FROM candidates where candidate_id = '".$voter['voters_id']."') GROUP BY positions.id";*/
+                                /*$query = "SELECT *, votes.position_id AS posid FROM votes LEFT JOIN candidates ON votes.candidate_id=candidates.id LEFT JOIN positions ON positions.id=candidates.position_id where candidates.position_id NOT IN (select position_id FROM candidates where candidate_id = '".$voter['voters_id']."') GROUP BY positions.id";*/
+                                /*$query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id where position_id NOT IN (select position_id FROM candidates where candidate_id = '".$voter['voters_id']."') AND NOT IN (select position_id, status AS enstat FROM enroll where voters_id = '".$voter['voters_id']."') GROUP BY positions.id";*/
+                                /*$query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id where position_id NOT IN (select position_id FROM candidates where candidate_id = '".$voter['voters_id']."') GROUP BY positions.id";*/
+                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id where position_id NOT IN (select position_id FROM candidates where candidate_id = '".$voter['voters_id']."') GROUP BY positions.id";
                                 $result = mysqli_query($conn,$query)or die( mysqli_error($conn));
                                 while($row = mysqli_fetch_array($result)){
                                     $id = $row['id'];
@@ -115,7 +115,7 @@
                           <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                           <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block uservoting' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block enrollvote' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                         </tr>
                       ";}
@@ -131,7 +131,7 @@
                           <a style='border-radius: 15px;' class='btn btn-warning btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                           <td>
-                          <a style='border-radius: 15px;' class='btn btn-warning btn-sm btn-flat btn-block disabled uservoting' data-id='".$id."'><i class='fa fa-search'></i> View</a>
+                          <a style='border-radius: 15px;' class='btn btn-warning btn-sm btn-flat btn-block disabled enrollvote' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                         </tr>
                       ";

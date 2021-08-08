@@ -3,6 +3,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <script type="text/javascript">
+                    var onloadCallback = function() {
+                        grecaptcha.render('html_element', {
+                            'sitekey' : '6LeLeuEbAAAAAI6nJayhyVYG7t6sk3fMxGVlWWYZ'
+                        });
+                    };
+                </script>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title"><b>Admin Registration</b></h4>
@@ -45,24 +52,14 @@
                             <input placeholder="0123456789" minlength="10" maxlength="12" type="text" onkeypress="return onlyNumberKey(event)" class="form-control" id="phone" name="phone" required>
                         </div>
                     </div>
-                    <!--<div class="form-group">
-                        <label for="date" class="col-sm-3 control-label">Date</label>
-
-                        <div class="col-sm-9">
-                            <input type="text" id="date" name="date" disabled>
-                            <script>
-                                var today = new Date();
-                                var date = today.getDate()+'-'+(today.getMonth()+1)+'-'+today.getFullYear();
-                                document.getElementById("date").value = date + ' ' + '(TODAY)';
-                            </script>
-                        </div>
-                    </div>-->
                     <div class="form-group">
                         <label for="photo" class="col-sm-3 control-label">Photo</label>
 
                         <div class="col-sm-9">
                             <input type="file" id="photo" name="photo" required>
                         </div>
+
+                        <div class="col-sm-9" id="html_element"></div>
                     </div>
 
             </div>
@@ -70,6 +67,9 @@
                 <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
                 <button type="submit" class="btn btn-success btn-flat" name="add"><i class="fa fa-check"></i> Register</button>
                 </form>
+                <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+                        async defer>
+                </script>
             </div>
         </div>
     </div>

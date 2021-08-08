@@ -53,6 +53,7 @@
                                 <div class="pull-right">
                                 <a href="#addnew" data-toggle="modal" class="btn btn-success btn-sm btn-flat"><i class="fa fa-plus"></i> New</a>
                                 <a href="voters_not.php" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-clock-o"></i> Pending Voter</a>
+                                <a href="voters_log.php" class="btn btn-info btn-sm btn-flat"><i class="fa fa-list-ul"></i> Log Activity</a>
                                 </div>
                                 </div>
                             <div class="box-body">

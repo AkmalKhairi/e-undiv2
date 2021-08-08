@@ -12,6 +12,12 @@ else{
 if(isset($_POST['save'])){
     $curr_password = $_POST['curr_password'];
 //    $username = $_POST['username'];
+
+    $nric = $voter['voters_id'];
+    $stats = "edit profile";
+    $catg = "Voter";
+    $logdate = date('Y/m/d H:i:s');
+
     $password = $_POST['password'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
@@ -39,6 +45,8 @@ if(isset($_POST['save'])){
         else{
             $_SESSION['error'] = $conn->error;
         }
+        $sql2 = "INSERT INTO logfile (date, firstname, nric, status, category) VALUES ('$logdate','$firstname','$nric','$stats','$catg')";
+        $query = $conn->query($sql2);
 
     }
     else{

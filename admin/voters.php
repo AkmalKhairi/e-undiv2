@@ -53,6 +53,7 @@
                   <th>Firstname</th>
                   <th>Lastname</th>
                   <th>Photo</th>
+                  <th>Phone Number</th>
                   <th>Status</th>
                   <th>Tools</th>
                   </thead>
@@ -70,6 +71,7 @@
                             <img src='".$image."' width='30px' height='30px'>
                             
                           </td>
+                          <td>".$row['phone']."</td>
                           <td>
                           ".$row['status']."
                           </td>
