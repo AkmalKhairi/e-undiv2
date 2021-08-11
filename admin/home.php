@@ -67,8 +67,8 @@
                         </thead>
                         <tbody>
                         <?php
-                        $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE positions.status = 'Ongoing' AND positions.created_by = '".$user['admin_id']."' GROUP BY positions.priority DESC";
-                        $result = mysqli_query($conn,$query);
+                        $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id WHERE positions.status = 'Ongoing' AND positions.created_by = '".$user['admin_id']."' GROUP BY positions.priority";
+                        $result = mysqli_query($conn,$query)or die( mysqli_error($conn));
                         while($row = mysqli_fetch_array($result)){
                             $id = $row['id'];
                             $description = $row['description'];
