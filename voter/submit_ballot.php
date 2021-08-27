@@ -15,7 +15,8 @@
 			while($row = $query->fetch_assoc()){
 				$position = slugify($row['description']);
 				$pos_id = $row['id'];
-				if(isset($_POST[$position])){
+                $votid = $voter['id'];
+                if(isset($_POST[$position])){
 					if($row['max_vote'] > 1){
 						if(count($_POST[$position]) > $row['max_vote']){
 							$error = true;
@@ -25,7 +26,8 @@
 							foreach($_POST[$position] as $key => $values){
 								/*$sql_array[] = "INSERT INTO votes (voters_id, candidate_id, position_id) VALUES ('".$voter['id']."', '$values', '$pos_id')";*/
                                 $sql_array[] = "INSERT INTO votes (voters_id, candidate_id, position_id) VALUES ('".$voter['id']."', '$values', '$pos_id')";
-							}
+                                $sql2 = "UPDATE enroll SET status = 'Done' WHERE voters_id = '$votid' AND position_id= '$pos_id'";
+                                $vquery = $conn->query($sql2);                            }
 
 						}
 						
@@ -34,6 +36,8 @@
 						$candidate = $_POST[$position];
 						/*$sql_array[] = "INSERT INTO votes (voters_id, candidate_id, position_id) VALUES ('".$voter['id']."', '$candidate', '$pos_id')";*/
                         $sql_array[] = "INSERT INTO votes (voters_id, candidate_id, position_id) VALUES ('".$voter['id']."', '$candidate', '$pos_id')";
+                        $sql2 = "UPDATE enroll SET status = 'Done' WHERE voters_id = '$votid' AND position_id= '$pos_id'";
+                        $vquery = $conn->query($sql2);
 					}
 
 				}

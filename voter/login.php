@@ -23,7 +23,7 @@
 			}
 		}
         $sql2 = "UPDATE voters SET logintime = CURRENT_TIMESTAMP WHERE voters_id = '$voter'";
-        $query = $conn->query($sql2);
+        $vquery = $conn->query($sql2);
 	}
 
 
@@ -31,6 +31,6 @@ else{
 		$_SESSION['error'] = 'Input voter credentials first';
 	}
 
-	header('location: votingtest.php');
+	header('location: testmodal.php');
 
 ?>

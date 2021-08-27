@@ -57,7 +57,7 @@
                   <th class="hidden"></th>
                   <th>Position</th>
                   <th>NRIC</th>
-                  <th>Candidate</th>
+                  <th>Name</th>
                   <th>Voting Status</th>
                 </thead>
                 <tbody>
@@ -71,7 +71,7 @@
                           <td class='hidden'></td>
                           <td>".$row['description']."</td>
                           <td>".$row['voters_id']."</td>
-                          <td>".$row['canfirst'].' '.$row['canlast']."</td>
+                          <td>".$row['votfirst'].' '.$row['votlast']."</td>
                           <td>DONE VOTING</td>
                         </tr>
                       ";

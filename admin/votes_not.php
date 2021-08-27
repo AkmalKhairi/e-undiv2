@@ -42,6 +42,48 @@
                 unset($_SESSION['success']);
             }
             ?>
+
+            <div class="modal fade" id="empModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Candidates</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal fade" id="empModal" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Candidates</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                    </div>
+                                    <div class="modal-body">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>                        <div class="modal-body">
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
             <div class="row">
                 <div class="col-xs-12">
                     <div class="box">
@@ -60,7 +102,7 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                $sql = "SELECT voters.id, voters.voters_id, voters.firstname,positions.description FROM voters LEFT JOIN enroll ON voters.id=enroll.voters_id LEFT JOIN positions ON enroll.position_id=positions.id WHERE enroll.status = 'Enrolled'";
+                                $sql = "SELECT *,voters.id, voters.voters_id, voters.firstname,positions.description FROM voters LEFT JOIN enroll ON voters.id=enroll.voters_id LEFT JOIN positions ON enroll.position_id=positions.id WHERE enroll.status = 'Enrolled'";
                                 /*SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id where position_id IN (select position_id FROM candidates where candidate_id = '".$voter['voters_id']."') GROUP BY positions.id*/
                                 /*SELECT *, voters.firstname AS votfirst, voters.lastname AS votlast FROM votes LEFT JOIN voters ON voters.id=votes.voters_id WHERE votes.voters_id != voters.voters_id AND voters.status = 'VERIFIED'*/
                                 $query = $conn->query($sql) or die($conn->error);
@@ -68,11 +110,11 @@
                                     echo "
                         <tr>
                           <td class='hidden'></td>
-                          <td>".$row['voters_id']."</td>
+                          <td>********".$row['voters_id']."</td>
                           <td>".$row['firstname']."</td>
                           <td>".$row['description']."</td>
                           <td>PENDING VOTING</td>
-                          <td><button class='btn btn-danger btn-sm notify btn-flat' data-id='".$row['id']."'><i class='fa fa-bell'></i> Notify</button></td>
+                          <td><button class='btn btn-warning btn-sm notify btn-flat' data-id='".$row['id']."'><i class='fa fa-bell'></i> Notify</button></td>
                         </tr>
                       ";
                                 }
@@ -112,6 +154,7 @@
                 $('#edit_firstname').val(response.firstname);
                 $('#edit_lastname').val(response.lastname);
                 $('#edit_password').val(response.password);
+                $('.phone').val(response.phone);
                 $('.fullname').html(response.firstname+' '+response.lastname);
             }
         });

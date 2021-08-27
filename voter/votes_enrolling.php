@@ -22,11 +22,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Available Election
+                Enroll in Election
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active"> Available Election</li>
+                <li class="active"> Enroll</li>
             </ol>
         </section>
 
@@ -86,10 +86,10 @@
                             <table id="example1" class="table table-bordered">
                                 <thead>
                                 <th style="text-align: center;">Voting Title</th>
-                                <th style="text-align: center;">Voting End</th>
+                                <!--<th style="text-align: center;">Enroll Deadline</th>-->
+                                <th style="text-align: center;">Enroll Deadline</th>
                                 <th style="text-align: center;">Candidates</th>
-                                <th style="text-align: center;">Result</th>
-                                <th style="text-align: center;">Voting</th>
+                                <th style="text-align: center;">Enroll</th>
                                 </thead>
                                 <tbody>
                                 <?php
@@ -102,24 +102,24 @@
                                 $result = mysqli_query($conn,$query)or die( mysqli_error($conn));
                                 while($row = mysqli_fetch_array($result)){
                                     $id = $row['id'];
+                                    $date = $row['nominationdate'];
                                     $description = $row['description'];
-                                    if ($row['status'] == 'Ongoing'){
+                                    if ($row['status'] == 'Pending'){
                                         echo "
                         <tr>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
-                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['enddate']."</td>
+                          <!--<td style='text-transform: uppercase; padding-left: 100px;' id='demo'></td>-->
+                        <td style='text-transform: uppercase; padding-left: 100px;'>".$row['nominationdate']."</td>
+
                           <td>
                           <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
-                          </td>
-                          <td>
-                          <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userresult' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                           <td>
                           <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block enrollvote' data-id='".$id."'><i class='fa fa-search'></i> View</a>
                           </td>
                         </tr>
                       ";}
-                                    elseif ($row['status'] == 'Finish'){
+                                    /*elseif ($row['status'] == 'Finish'){
                                         echo "
                         <tr>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
@@ -135,7 +135,7 @@
                           </td>
                         </tr>
                       ";
-                                    }
+                                    }*/
                                 }
                                 ?>
                                 </tbody>
@@ -218,6 +218,32 @@
                                             }
                                         });
                                     });
+
+                                    /*var countDownDate = <?php
+                                    echo strtotime("$date" ) ?> * 1000;
+                                    var now = <?php echo time() ?> * 1000;
+
+                                    // Update the count down every 1 second
+                                    var x = setInterval(function() {
+                                        now = now + 1000;
+                                    // Find the distance between now an the count down date
+                                        var distance = countDownDate - now;
+                                    // Time calculations for days, hours, minutes and seconds
+                                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                    // Output the result in an element with id="demo"
+                                        document.getElementById("demo").innerHTML = days + "d " + hours + "h " +
+                                            minutes + "m " + seconds + "s ";
+                                    // If the count down is over, write some text
+                                        if (distance < 0) {
+                                            clearInterval(x);
+                                            document.getElementById("demo").innerHTML = "EXPIRED";
+                                        }
+
+                                    }, 1000);*/
+
                                 });
                             </script>
                         </div>

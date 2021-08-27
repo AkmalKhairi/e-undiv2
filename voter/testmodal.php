@@ -22,11 +22,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Available Election
+                Enrolled Election
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active"> Available Election</li>
+                <li class="active"> Enrolled Election</li>
             </ol>
         </section>
 
@@ -89,6 +89,7 @@
                             <table id="example1" class="table table-bordered">
                                 <thead>
                                 <th style="text-align: center;">Voting Title</th>
+                                <th style="text-align: center;">Voting Start</th>
                                 <th style="text-align: center;">Voting End</th>
                                 <th style="text-align: center;">Candidates</th>
                                 <th style="text-align: center;">Result</th>
@@ -97,16 +98,17 @@
                                 <tbody>
                                 <?php
                                 /*UPDATE WHERE CLAUSE TO SUBQUERY */
-
-                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id where position_id IN (select voters_id FROM enroll where voters_id = '".$voter['id']."') GROUP BY positions.id";
+                                $query = "SELECT *, positions.status AS stat, positions.id AS id FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id LEFT JOIN enroll ON enroll.position_id=positions.id where enroll.voters_id ='".$voter['id']."' GROUP BY positions.id";
+/*                                $query = "SELECT * FROM candidates LEFT JOIN positions ON positions.id=candidates.position_id where position_id IN (select voters_id FROM enroll where voters_id = '".$voter['id']."') GROUP BY positions.id";*/
                                 $result = mysqli_query($conn,$query)or die( mysqli_error($conn));
                                 while($row = mysqli_fetch_array($result)){
                                     $id = $row['id'];
                                     $description = $row['description'];
-                                    if ($row['status'] == 'Ongoing'){
+                                    if ($row['stat'] == 'Ongoing'){
                                         echo "
                         <tr>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
+                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['startdate']."</td>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['enddate']."</td>
                           <td>
                           <a style='border-radius: 15px;' class='btn btn-info btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>
@@ -119,10 +121,11 @@
                           </td>
                         </tr>
                       ";}
-                                    elseif ($row['status'] == 'Finish'){
+                                    elseif ($row['stat'] == 'Pending'){
                                         echo "
                         <tr>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['description']."</td>
+                          <td style='text-transform: uppercase; padding-left: 100px;'>".$row['startdate']."</td>
                           <td style='text-transform: uppercase; padding-left: 100px;'>".$row['enddate']."</td>
                           <td>
                           <a style='border-radius: 15px;' class='btn btn-warning btn-sm btn-flat btn-block userinfo' data-id='".$id."'><i class='fa fa-search'></i> View</a>

@@ -4,11 +4,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <script type="text/javascript">
+
                     var onloadCallback = function() {
                         grecaptcha.render('html_element', {
                             'sitekey' : '6LeLeuEbAAAAAI6nJayhyVYG7t6sk3fMxGVlWWYZ'
                         });
                     };
+
                 </script>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
@@ -59,7 +61,7 @@
                             <input type="file" id="photo" name="photo" required>
                         </div>
 
-                        <div class="col-sm-9" id="html_element"></div>
+                        <div class="col-sm-9 g-recaptcha" id="html_element"></div>
                     </div>
 
             </div>
