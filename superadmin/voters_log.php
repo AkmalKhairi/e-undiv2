@@ -12,7 +12,7 @@
         <section class="content-header">
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Admin Pending List</li>
+                <li class="active">Log Activity</li>
             </ol>
         </section>
         <!-- Main content -->
@@ -20,7 +20,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Log Activity (Admin)
+                Log Activity (Voter)
             </h1>
 
         </section>

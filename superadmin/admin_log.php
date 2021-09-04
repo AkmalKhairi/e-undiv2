@@ -12,7 +12,7 @@
         <section class="content-header">
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Admin Pending List</li>
+                <li class="active">Log Activity</li>
             </ol>
         </section>
         <!-- Main content -->
