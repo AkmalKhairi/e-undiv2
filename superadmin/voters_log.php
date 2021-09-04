@@ -20,7 +20,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Log Activities (Voter)
+                Log Activity (Voter)
             </h1>
 
         </section>

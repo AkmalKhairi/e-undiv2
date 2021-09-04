@@ -20,7 +20,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Log Activities (Admin)
+                Log Activity (Admin)
             </h1>
 
         </section>
