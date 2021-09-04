@@ -64,6 +64,6 @@
 		$_SESSION['error'][] = 'Select candidates to vote first';
 	}
 
-	header('location: votingtest.php');
+	header('location: testmodal.php');
 
 ?>
