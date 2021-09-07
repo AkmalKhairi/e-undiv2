@@ -32,21 +32,21 @@
                     <label for="firstname" class="col-sm-3 control-label">Firstname</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="firstname" name="firstname" required>
+                      <input type="text" class="form-control" id="firstname" name="firstname" onPaste="return false" onkeypress="return (event.charCode > 31 && event.charCode < 33) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="lastname" class="col-sm-3 control-label">Lastname</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="lastname" name="lastname" required>
+                      <input type="text" class="form-control" id="lastname" name="lastname" onPaste="return false" onkeypress="return (event.charCode > 31 && event.charCode < 33) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required>
                     </div>
                 </div>
                   <div class="form-group">
                       <label for="candidate_id" class="col-sm-3 control-label">ID</label>
 
                       <div class="col-sm-9">
-                          <input type="text" class="form-control" placeholder="Last 4-Digits of NRIC" id="candidate_id" name="candidate_id" maxlength="4" onkeypress="return onlyNumberKey(event)" required>
+                          <input type="text" class="form-control" placeholder="Last 4-Digits of NRIC" id="candidate_id" name="candidate_id" maxlength="4" onPaste="return false" onkeypress="return onlyNumberKey(event)" required>
                       </div>
                   </div>
                 <div class="form-group">
@@ -107,14 +107,14 @@
                     <label for="edit_firstname" class="col-sm-3 control-label">Firstname</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_firstname" name="firstname" required>
+                      <input type="text" class="form-control" id="edit_firstname" name="firstname" onPaste="return false" onkeypress="return (event.charCode > 31 && event.charCode < 33) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="edit_lastname" class="col-sm-3 control-label">Lastname</label>
 
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_lastname" name="lastname" required>
+                      <input type="text" class="form-control" id="edit_lastname" name="lastname" onPaste="return false" onkeypress="return (event.charCode > 31 && event.charCode < 33) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" required>
                     </div>
                 </div>
                 <div class="form-group">

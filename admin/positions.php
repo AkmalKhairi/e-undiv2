@@ -63,7 +63,7 @@
                 </thead>
                 <tbody>
                   <?php
-                    $sql = "SELECT * FROM positions WHERE created_by = '".$user['admin_id']."' AND status != 'Finish' ORDER BY priority ASC";
+                    $sql = "SELECT * FROM positions WHERE created_by = '".$user['admin_id']."' AND status != 'Finish' AND status != 'Cancelled' ORDER BY priority ASC";
                     $query = $conn->query($sql);
                     while($row = $query->fetch_assoc()){
                       echo "
@@ -79,7 +79,7 @@
                           <td>
                             <button class='btn btn-primary btn-sm pending btn-flat' data-id='".$row['id']."'><i class='fa fa-hourglass-start'></i> Start Vote</button>                         
                             <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-times'></i> Cancel</button>
                           </td>
                         </tr>
                       ";
@@ -89,7 +89,7 @@
                           <td>
                             <button class='btn btn-warning btn-sm status btn-flat'  data-id='".$row['id']."'><i class='fa fa-hourglass-end'></i> End Vote</button>                         
                             <button class='btn btn-success btn-sm edit btn-flat' disabled data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' disabled data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
+                            <button class='btn btn-danger btn-sm delete btn-flat' disabled data-id='".$row['id']."'><i class='fa fa-times'></i> Cancel</button>
                           </td>
                         </tr>  
                       ";

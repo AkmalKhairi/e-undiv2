@@ -11,12 +11,13 @@
         $description = $row['description'];
         $created = $user['admin_id'];
         $fname = $user['firstname'];
-        $stats = "delete election name";
+        $stats = "cancel election name";
         $catg = "Admin";
         $logdate = date('Y/m/d H:i:s');
-		$sql = "DELETE FROM positions WHERE id = '$id'";
+        $status = "Cancelled";
+        $sql = "UPDATE positions SET status = '$status' WHERE id = '$id'";
 		if($conn->query($sql)){
-			$_SESSION['success'] = 'Position deleted successfully';
+			$_SESSION['success'] = 'Voting Session Cancelled Successfully';
 		}
 		else{
 			$_SESSION['error'] = $conn->error;
@@ -25,7 +26,7 @@
         $query = $conn->query($sql2);
 	}
 	else{
-		$_SESSION['error'] = 'Select item to delete first';
+		$_SESSION['error'] = 'Select item to cancel first';
 	}
 
 	header('location: positions.php');

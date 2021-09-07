@@ -21,6 +21,7 @@ if(isset($_POST['save'])){
     $password = $_POST['password'];
     $firstname = $_POST['firstname'];
     $lastname = $_POST['lastname'];
+    $phone = $_POST['phone'];
     $photo = $_FILES['photo']['name'];
     if(password_verify($curr_password, $voter['password'])){
         if(!empty($photo)){
@@ -38,7 +39,7 @@ if(isset($_POST['save'])){
             $password = password_hash($password, PASSWORD_DEFAULT);
         }
 
-        $sql = "UPDATE voters SET password = '$password', firstname = '$firstname', lastname = '$lastname', photo = '$filename' WHERE id = '".$voter['id']."'";
+        $sql = "UPDATE voters SET phone= '$phone', password = '$password', firstname = '$firstname', lastname = '$lastname', photo = '$filename' WHERE id = '".$voter['id']."'";
         if($conn->query($sql)){
             $_SESSION['success'] = 'User profile updated successfully';
         }

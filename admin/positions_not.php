@@ -62,7 +62,7 @@
                                 </thead>
                                 <tbody>
                                 <?php
-                                $sql = "SELECT * FROM positions WHERE status= 'Finish' ORDER BY priority ASC";
+                                $sql = "SELECT * FROM positions WHERE status= 'Finish' OR status= 'Cancelled' ORDER BY priority ASC";
                                 $query = $conn->query($sql);
                                 while($row = $query->fetch_assoc()){
                                     echo "

@@ -20,17 +20,23 @@
                         <label for="firstname" class="col-sm-3 control-label">Firstname</label>
 
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="firstname" name="firstname" value="<?php echo $voter['firstname']; ?>">
+                            <input type="text" class="form-control" id="firstname" name="firstname" onPaste="return false" onkeypress="return (event.charCode > 31 && event.charCode < 33) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" value="<?php echo $voter['firstname']; ?>">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="lastname" class="col-sm-3 control-label">Lastname</label>
 
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="lastname" name="lastname" value="<?php echo $voter['lastname']; ?>">
+                            <input type="text" class="form-control" id="lastname" name="lastname" onPaste="return false" onkeypress="return (event.charCode > 31 && event.charCode < 33) || (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123)" value="<?php echo $voter['lastname']; ?>">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="phone" class="col-sm-3 control-label">Phone Number</label>
 
+                        <div class="col-sm-9">
+                            <input placeholder="0123456789" minlength="10" maxlength="12" type="text" onPaste ="return false" value="<?php echo $voter['phone']; ?>" onkeypress="return onlyNumberKey(event)" class="form-control" id="phone" name="phone" required>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="password" class="col-sm-3 control-label">Password</label>
 
